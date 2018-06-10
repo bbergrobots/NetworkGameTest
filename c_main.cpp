@@ -1,11 +1,15 @@
+//
+// Created by Brendan Berg on 10.06.18.
+//
+
 #include <iostream>
 
 
 int main()
 {
-    std::cout << "NetworkGameTest Client Boot" << std::endl;
-    std::cout << "===========================" << std::endl;
-    std::cout << std::endl << std::endl;
+    std::cout << "\n";
+    std::cout << "NetworkGameTest Client Boot\n";
+    std::cout << "===========================\n\n";
 
     return 0;
 }
