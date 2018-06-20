@@ -22,9 +22,11 @@ public:
     explicit MapHandler(const char* filename);
 
     /**
-     * @brief deconstructor closes the file and frees used memory
+     * @brief destructor closes the file and frees used memory
      */
     ~MapHandler();
+
+    char* getMap() const;
 
 private:
 
