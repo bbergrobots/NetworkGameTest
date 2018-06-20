@@ -1,0 +1,1 @@
+add_library(clibs mapHandler.cpp mapHandler.hpp serverHandler.cpp serverHandler.hpp)
