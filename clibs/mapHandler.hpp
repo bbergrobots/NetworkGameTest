@@ -6,7 +6,10 @@
 #define NETWORKGAMETEST_MAPHANDLER_HPP
 
 
-class MapHandler
+#include "serverRecvHandler.hpp"
+
+
+class MapHandler : public ServerRecvHandler
 {
 public:
 
@@ -14,14 +17,18 @@ public:
 
     ~MapHandler();
 
+    bool canHandleData(unsigned short dataCode, size_t length) const override;
+
+    void recvData(unsigned char* rawData, size_t length) override;
+
+    void recvMap(unsigned char* rawData);
+
     void print() const;
 
-    void setMap(char* mapData);
 
 private:
 
-    char* m_Map;
-
+    unsigned char* m_Map;
 
 };
 

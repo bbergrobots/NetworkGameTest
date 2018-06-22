@@ -26,7 +26,7 @@ public:
      */
     ~MapHandler();
 
-    char* getMap() const;
+    unsigned char* getMap() const;
 
 private:
 
@@ -38,7 +38,7 @@ private:
     /**
      * @brief buffer to work with containing the map
      */
-    char* m_Map;
+    unsigned char* m_Map;
 
     /**
      * @brief generate a random map

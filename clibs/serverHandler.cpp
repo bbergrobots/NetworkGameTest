@@ -4,50 +4,32 @@
 
 #include "serverHandler.hpp"
 
-#include <cassert>
-#include <fcntl.h>
-#include <arpa/inet.h>
-#include <unistd.h>
 #include <iostream>
+#include <cstdlib>
 
 
 ServerHandler::ServerHandler(const char *serverAddr, short serverPort)
 {
-    int ret, tmp, yes = 1;
+    m_Socket = BaseSocket();
+    m_Socket.init();
+    m_Socket.setRemoteAddress(serverAddr, serverPort);
+    m_Socket.bindToHost();
+}
 
-    // create socket
-    m_SockFD = socket(PF_INET, SOCK_STREAM, 0);
-    assert(m_SockFD != -1);
+ServerHandler::~ServerHandler()
+{
+    m_RunningMutex.lock();
+    m_Running = false;
+    m_RunningMutex.unlock();
+    m_UpdateThread.join();
 
-    // set socket options
-    ret = setsockopt(m_SockFD, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
-    assert(ret != -1);
+    m_Socket.closeSocket();
+}
 
-    // assign address information to socket
-    m_ClientAddr.sin_family = AF_INET;
-    m_ClientAddr.sin_port = 0;
-    m_ClientAddr.sin_addr.s_addr = 0; // auto address
-    memset(&(m_ClientAddr.sin_zero), '\0', 8);
-
-    struct in_addr hostInAddr{};
-    inet_aton(serverAddr, &hostInAddr); // can fail --> returns 0
-    m_HostAddr.sin_family = AF_INET;
-    m_HostAddr.sin_port = htons(serverPort);
-    m_HostAddr.sin_addr = hostInAddr;
-    memset(&(m_HostAddr.sin_zero), '\0', 8);
-
-    // bind socket to address
-    ret = bind(m_SockFD, (struct sockaddr *) &m_ClientAddr, sizeof(struct sockaddr));
-    assert(ret != -1);
-
-    // connect to server
-    ret = connect(m_SockFD, (struct sockaddr *) &m_HostAddr, sizeof(struct sockaddr));
-    assert(ret != -1);
-
-    // set non-blocking mode
-    tmp = fcntl(m_SockFD, F_GETFL);
-    tmp |= O_NONBLOCK;
-    fcntl(m_SockFD, F_SETFL, tmp);
+void ServerHandler::activateConnection()
+{
+    m_Socket.connectToRemote();
+    m_Socket.setNonBlocking(true);
 
     m_ServerConnectedMutex.lock();
     m_ServerConnected = true;
@@ -61,14 +43,9 @@ ServerHandler::ServerHandler(const char *serverAddr, short serverPort)
     });
 }
 
-ServerHandler::~ServerHandler()
+void ServerHandler::addServerRecvHandler(ServerRecvHandler *srh)
 {
-    m_RunningMutex.lock();
-    m_Running = false;
-    m_RunningMutex.unlock();
-    m_UpdateThread.join();
-
-    close(m_SockFD);
+    m_ServerRecvHandler.push_back(srh);
 }
 
 bool ServerHandler::isServerConnected() const
@@ -78,12 +55,12 @@ bool ServerHandler::isServerConnected() const
 
 void ServerHandler::update()
 {
-    ssize_t len;
-    char buf[1024];
+    int len;
+    unsigned char buf[1024];
 
     while(m_Running && m_ServerConnected)
     {
-        len = recv(m_SockFD, &buf, 1024, 0);
+        len = m_Socket.receiveData((char*) &buf, 1024);
 
         switch (len)
         {
@@ -95,15 +72,49 @@ void ServerHandler::update()
             m_ServerConnected = false;
             m_ServerConnectedMutex.unlock();
             break;
+        case 1: case 2:
+            break;
         default:
-            std::cout << "Receiving message from server:\n    ";
-            for(ssize_t i = 0; i < len; i++)
+            printRecvData(buf, len);
+
+            unsigned short dataCode = buf[0];
+            dataCode = dataCode << 8;
+            dataCode |= buf[1];
+            size_t dataLength = (size_t) len - 2;
+
+            for (auto srh : m_ServerRecvHandler)
             {
-                std::cout << buf[i];
+                if (srh->canHandleData(dataCode, dataLength))
+                {
+                    srh->recvData(buf, dataLength);
+                }
             }
-            std::cout << '\n';
+
             const char *msg = "Hello, world!";
             send(m_SockFD, msg, 13, 0);
         }
     }
+}
+
+void ServerHandler::printRecvData(unsigned char *rawData, int length) const
+{
+    std::cout << std::hex;
+    std::cout << "Receiving message from server:\n";
+    std::cout << "    Header: " << (short) rawData[0] << ' ' << (short) rawData[1] << '\n';
+    std::cout << "    Data  : ";
+
+    for (int i = 2; i < length; i++)
+    {
+        if (((i - 2) % 8 == 0) && (i != 2))
+        {
+            std::cout << "            ";
+        }
+        std::cout << (short) rawData[i] << ' ';
+        if (((i - 1) % 8 == 0) && ((i + 1) != length))
+        {
+            std::cout << '\n';
+        }
+    }
+    std::cout << '\n';
+    std::cout << std::dec;
 }

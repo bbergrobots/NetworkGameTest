@@ -20,11 +20,13 @@ public:
 
     ~Player();
 
-    void sendMap(char* mapData) const;
-
     void update();
 
     bool isClientConnected() const;
+
+    void sendRawData(unsigned char* data, size_t length) const;
+
+    void sendMap(unsigned char* mapData) const;
 
 
 private:

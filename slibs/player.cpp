@@ -70,14 +70,24 @@ void Player::update()
             std::cout << "Receiving message from player with FD " << m_SockFD <<":\n    ";
             for(ssize_t i = 0; i < len; i++)
             {
-                std::cout << (char) buf[i];
+                std::cout << buf[i];
             }
             std::cout << '\n';
         }
     }
 }
 
-void Player::sendMap(char* mapData) const
+void Player::sendRawData(unsigned char *data, size_t length) const
 {
-    send(m_SockFD, mapData, 16 * 2, 0);
+    send(m_SockFD, data, length, 0);
+}
+
+void Player::sendMap(unsigned char* mapData) const
+{
+    auto data = new unsigned char[16 * 2 + 2];
+    memcpy(data + 2, mapData, 16 * 2);
+    memset(data, 0x00, 2);
+    data[0] = 0x10;
+
+    sendRawData(data, 16 * 2 + 2);
 }

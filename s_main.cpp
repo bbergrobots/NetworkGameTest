@@ -17,10 +17,10 @@ int main()
     MapHandler mapHandler("map.bin");
     PlayerHandler playerHandler(&mapHandler);
 
-    auto t = std::chrono::seconds(20);
+    auto t = std::chrono::seconds(180);
     std::this_thread::sleep_for(t);
 
-    std::cout << "Finishing program execution\n";
+    std::cout << "Terminating server execution\n";
 
     return 0;
 }

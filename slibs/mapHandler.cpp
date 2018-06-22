@@ -26,7 +26,7 @@ MapHandler::MapHandler(const char *filename)
 
     m_File.open(filename, std::ios::in | std::ios::out | std::ios::binary);
 
-    m_Map = new char[16*2];
+    m_Map = new unsigned char[16*2];
 
     if (flag)
     {
@@ -54,7 +54,7 @@ void MapHandler::initializeMap()
 {
     for(size_t i = 0; i < 16 * 2; i++)
     {
-        m_Map[i] = static_cast<char>(rand() & 0xff);
+        m_Map[i] = static_cast<unsigned char>(rand() & 0xff);
     }
 }
 
@@ -63,7 +63,7 @@ void MapHandler::saveEntireMap()
     if (m_File.is_open())
     {
         m_File.seekp(0);
-        m_File.write(m_Map, 16 * 2);
+        m_File.write((char*) m_Map, 16 * 2);
     }
 }
 
@@ -81,12 +81,12 @@ void MapHandler::loadMap()
         else
         {
             m_File.seekg(0);
-            m_File.read(m_Map, 16 * 2);
+            m_File.read((char*) m_Map, 16 * 2);
         }
     }
 }
 
-char* MapHandler::getMap() const
+unsigned char* MapHandler::getMap() const
 {
     return m_Map;
 }

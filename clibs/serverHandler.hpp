@@ -5,10 +5,13 @@
 #ifndef NETWORKGAMETEST_SERVERHANDLER_HPP
 #define NETWORKGAMETEST_SERVERHANDLER_HPP
 
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include "serverRecvHandler.hpp"
+
+#include <common/baseSocket.hpp>
+
 #include <thread>
 #include <mutex>
+#include <list>
 
 
 class ServerHandler
@@ -19,16 +22,17 @@ public:
 
     ~ServerHandler();
 
+    void addServerRecvHandler(ServerRecvHandler* srh);
+
+    void activateConnection();
+
     bool isServerConnected() const;
 
     void update();
 
 private:
 
-    int m_SockFD;
-
-    struct sockaddr_in m_HostAddr;
-    struct sockaddr_in m_ClientAddr;
+    BaseSocket m_Socket;
 
     std::thread m_UpdateThread;
 
@@ -37,6 +41,10 @@ private:
 
     std::mutex m_ServerConnectedMutex;
     bool m_ServerConnected;
+
+    std::list<ServerRecvHandler*> m_ServerRecvHandler;
+
+    void printRecvData(unsigned char* rawData, int length) const;
 };
 
 
