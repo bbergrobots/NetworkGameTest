@@ -7,7 +7,7 @@
 
 #include "serverRecvHandler.hpp"
 
-#include <common/baseSocket.hpp>
+#include <baseSocket.hpp>
 
 #include <thread>
 #include <mutex>

@@ -1,1 +1,0 @@
-add_library(common baseSocket.cpp baseSocket.hpp)

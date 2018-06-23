@@ -2,8 +2,8 @@
 // Created by Brendan Berg on 10.06.18.
 //
 
-#include <clibs/mapHandler.hpp>
-#include <clibs/serverHandler.hpp>
+#include <mapHandler.hpp>
+#include <serverHandler.hpp>
 
 #include <iostream>
 

@@ -5,9 +5,7 @@
 #include "playerHandler.hpp"
 
 #include <iostream>
-#include <cassert>
-#include <fcntl.h>
-#include <unistd.h>
+#include <netinet/in.h>
 
 
 PlayerHandler::PlayerHandler(MapHandler* mapHandler)

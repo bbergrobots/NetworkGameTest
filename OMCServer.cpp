@@ -2,10 +2,11 @@
 // Created by Brendan Berg on 10.06.18.
 //
 
-#include <slibs/mapHandler.hpp>
-#include <slibs/playerHandler.hpp>
+#include <mapHandler.hpp>
+#include <playerHandler.hpp>
 
 #include <iostream>
+#include <thread>
 
 
 int main()

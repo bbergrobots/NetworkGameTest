@@ -1,1 +1,0 @@
-add_library(slibs mapHandler.hpp mapHandler.cpp player.cpp player.hpp playerHandler.cpp playerHandler.hpp)

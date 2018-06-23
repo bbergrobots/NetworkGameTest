@@ -1,0 +1,19 @@
+project(proj_slibs)
+
+
+add_library(
+        slibs STATIC
+        mapHandler.cpp
+        playerHandler.cpp
+        player.cpp
+)
+
+target_include_directories(
+        slibs
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        PRIVATE
+        src
+)
+
+target_link_libraries(slibs sock)

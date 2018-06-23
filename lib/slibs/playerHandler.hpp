@@ -8,11 +8,8 @@
 #include "player.hpp"
 #include "mapHandler.hpp"
 
-#include <common/baseSocket.hpp>
+#include <baseSocket.hpp>
 
-//network
-#include <netinet/in.h>
-#include <sys/socket.h>
 //std
 #include <list>
 //thread
@@ -31,9 +28,6 @@ public:
 
     
 private:
-
-    int m_SockFD;
-    struct sockaddr_in m_HostAddr;
 
     BaseSocket m_Socket;
 

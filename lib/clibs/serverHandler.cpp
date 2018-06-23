@@ -90,8 +90,8 @@ void ServerHandler::update()
                 }
             }
 
-            const char *msg = "Hello, world!";
-            send(m_SockFD, msg, 13, 0);
+//            const char *msg = "Hello, world!";
+//            send(m_SockFD, msg, 13, 0);
         }
     }
 }
