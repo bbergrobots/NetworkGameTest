@@ -8,8 +8,8 @@
 #include <netinet/in.h>
 
 
-PlayerHandler::PlayerHandler(MapHandler* mapHandler)
-    : m_MapHandler(mapHandler)
+PlayerHandler::PlayerHandler(BaseMap* map)
+    : mMap(map)
 {
     m_Socket = BaseSocket();
     m_Socket.init();
@@ -58,7 +58,7 @@ void PlayerHandler::update()
             auto newPlayer = new Player(newSockFD, clientAddr);
             m_Player.push_back(newPlayer);
 
-            newPlayer->sendMap(m_MapHandler->getMap());
+            newPlayer->sendMap(mMap->getMapData());
         }
 
         for (auto it = m_Player.begin(); it != m_Player.end(); it++)

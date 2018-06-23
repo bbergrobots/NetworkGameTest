@@ -1,9 +1,5 @@
-project(proj_slibs)
-
-
 add_library(
         slibs STATIC
-        mapHandler.cpp
         playerHandler.cpp
         player.cpp
 )
@@ -16,4 +12,4 @@ target_include_directories(
         src
 )
 
-target_link_libraries(slibs sock)
+target_link_libraries(slibs sock map)

@@ -2,7 +2,7 @@
 // Created by Brendan Berg on 10.06.18.
 //
 
-#include <mapHandler.hpp>
+#include <map/server/fileMap.hpp>
 #include <playerHandler.hpp>
 
 #include <iostream>
@@ -15,8 +15,8 @@ int main()
     std::cout << "NetworkGameTest Server Boot\n";
     std::cout << "===========================\n\n";
 
-    MapHandler mapHandler("map.bin");
-    PlayerHandler playerHandler(&mapHandler);
+    FileMap map(2, "map.bin");
+    PlayerHandler playerHandler(&map);
 
     auto t = std::chrono::seconds(180);
     std::this_thread::sleep_for(t);

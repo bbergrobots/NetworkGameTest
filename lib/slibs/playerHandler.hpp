@@ -6,9 +6,9 @@
 #define NETWORKGAMETEST_PLAYERHANDLER_HPP
 
 #include "player.hpp"
-#include "mapHandler.hpp"
+#include <map/baseMap.hpp>
 
-#include <baseSocket.hpp>
+#include <sock/baseSocket.hpp>
 
 //std
 #include <list>
@@ -20,7 +20,7 @@
 class PlayerHandler
 {
 public:
-    explicit PlayerHandler(MapHandler* mapHandler);
+    explicit PlayerHandler(BaseMap* map);
 
     ~PlayerHandler();
 
@@ -31,7 +31,7 @@ private:
 
     BaseSocket m_Socket;
 
-    MapHandler* m_MapHandler;
+    BaseMap* mMap;
 
     std::list<Player*> m_Player;
 

@@ -2,7 +2,7 @@
 // Created by Brendan Berg on 22.06.18.
 //
 
-#include "baseSocket.hpp"
+#include "sock/baseSocket.hpp"
 
 #include <sys/socket.h>
 #include <fcntl.h>
