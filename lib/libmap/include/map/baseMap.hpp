@@ -35,7 +35,7 @@ public:
     void print();
 
     /**
-     * @brief return raw map data
+     * @brief get raw map data
      * @return pointer to first map byte
      */
     unsigned char* getMapData();
