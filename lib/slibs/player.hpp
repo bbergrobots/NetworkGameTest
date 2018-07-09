@@ -5,6 +5,8 @@
 #ifndef NETWORKGAMETEST_PLAYER_HPP
 #define NETWORKGAMETEST_PLAYER_HPP
 
+#include <sock/sessionSocket.hpp>
+
 //network
 #include <netinet/in.h>
 //thread
@@ -16,7 +18,7 @@ class Player
 {
 public:
 
-    Player(int sockFD, struct sockaddr_in clientAddr);
+    Player(SessionSocket* socket);
 
     ~Player();
 
@@ -31,8 +33,7 @@ public:
 
 private:
 
-    int m_SockFD;
-    struct sockaddr_in m_ClientAddr;
+    SessionSocket* m_Socket;
 
     std::thread m_UpdateThread;
 

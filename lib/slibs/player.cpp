@@ -9,12 +9,12 @@
 #include <unistd.h>
 
 
-Player::Player(int sockFD, struct sockaddr_in clientAddr)
-    : m_SockFD(sockFD), m_ClientAddr(clientAddr)
+Player::Player(SessionSocket* socket)
+    : m_Socket(socket)
 {
-    std::cout << "Constructing player with FD " << m_SockFD << ".\n";
-    std::cout << "    Address : " << inet_ntoa(m_ClientAddr.sin_addr) << "\n";
-    std::cout << "    Port    : " << ntohs(m_ClientAddr.sin_port) << "\n";
+    std::cout << "Constructing player with FD " << ".\n";
+//    std::cout << "    Address : " << inet_ntoa(m_ClientAddr.sin_addr) << "\n";
+//    std::cout << "    Port    : " << ntohs(m_ClientAddr.sin_port) << "\n";
 
     m_ClientConnectedMutex.lock();
     m_ClientConnected = true;
@@ -31,7 +31,7 @@ Player::Player(int sockFD, struct sockaddr_in clientAddr)
 
 Player::~Player()
 {
-    std::cout << "Destructing player with FD " << m_SockFD << ".\n";
+    std::cout << "Destructing player with FD " << ".\n";
 
     // deactivate update thread
     m_RunningMutex.lock();
@@ -39,7 +39,8 @@ Player::~Player()
     m_RunningMutex.unlock();
     m_UpdateThread.join();
 
-    close(m_SockFD);
+//    close(m_SockFD);
+    m_Socket->closeSocket();
 }
 
 bool Player::isClientConnected() const
@@ -54,20 +55,21 @@ void Player::update()
 
     while(m_Running && m_ClientConnected)
     {
-        len = recv(m_SockFD, &buf, 1024, 0);
+//        len = recv(m_SockFD, &buf, 1024, 0);
+        len = m_Socket->receiveData(&buf[0], 1024);
 
         switch (len)
         {
         case -1:
             break;
         case 0:
-            std::cout << "Client with FD " << m_SockFD << " disconnected.\n";
+            std::cout << "Client with FD " << " disconnected.\n";
             m_ClientConnectedMutex.lock();
             m_ClientConnected = false;
             m_ClientConnectedMutex.unlock();
             break;
         default:
-            std::cout << "Receiving message from player with FD " << m_SockFD <<":\n    ";
+            std::cout << "Receiving message from player with FD " <<":\n    ";
             for(ssize_t i = 0; i < len; i++)
             {
                 std::cout << buf[i];
@@ -79,7 +81,8 @@ void Player::update()
 
 void Player::sendRawData(unsigned char *data, size_t length) const
 {
-    send(m_SockFD, data, length, 0);
+//    send(m_SockFD, data, length, 0);
+    send(m_Socket->getFD(), data, length, 0);
 }
 
 void Player::sendMap(unsigned char* mapData) const

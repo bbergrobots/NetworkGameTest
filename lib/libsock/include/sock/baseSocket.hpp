@@ -36,10 +36,12 @@ public:
 
     void closeSocket();
 
+protected:
+
+    int m_SockFD;
 
 private:
 
-    int m_SockFD;
 
     struct sockaddr_in m_HostAddress;
 

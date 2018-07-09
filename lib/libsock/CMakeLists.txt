@@ -1,6 +1,8 @@
 add_library(
         sock STATIC
         src/baseSocket.cpp
+        src/listeningSocket.cpp
+        src/sessionSocket.cpp
 )
 
 target_include_directories(

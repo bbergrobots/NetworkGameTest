@@ -8,6 +8,7 @@
 #include "player.hpp"
 #include <map/baseMap.hpp>
 
+#include <sock/listeningSocket.hpp>
 #include <sock/baseSocket.hpp>
 
 //std
@@ -29,9 +30,9 @@ public:
     
 private:
 
-    BaseSocket m_Socket;
+    ListeningSocket m_Socket;
 
-    BaseMap* mMap;
+    BaseMap* m_Map;
 
     std::list<Player*> m_Player;
 

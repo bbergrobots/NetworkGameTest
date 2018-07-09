@@ -9,15 +9,8 @@
 
 
 PlayerHandler::PlayerHandler(BaseMap* map)
-    : mMap(map)
+    : m_Map(map), m_Socket(1337)
 {
-    m_Socket = BaseSocket();
-    m_Socket.init();
-    m_Socket.setHostPort(1337);
-    m_Socket.bindToHost();
-    m_Socket.listenForConnections();
-    m_Socket.setNonBlocking(true);
-
     // start update thread
     m_RunningMutex.lock();
     m_Running = true;
@@ -50,15 +43,18 @@ void PlayerHandler::update()
     struct sockaddr_in clientAddr{};
     int newSockFD;
 
+    SessionSocket* newSock;
+
     while (m_Running)
     {
-        newSockFD = m_Socket.acceptConnection((struct sockaddr *) &clientAddr);
-        if (newSockFD != -1)
+        newSock = m_Socket.acceptConnection();
+
+        if (newSock != nullptr)
         {
-            auto newPlayer = new Player(newSockFD, clientAddr);
+            auto newPlayer = new Player(newSock);
             m_Player.push_back(newPlayer);
 
-            newPlayer->sendMap(mMap->getMapData());
+            newPlayer->sendMap(m_Map->getMapData());
         }
 
         for (auto it = m_Player.begin(); it != m_Player.end(); it++)

@@ -67,7 +67,7 @@ void BaseSocket::setNonBlocking(bool state)
     }
     else
     {
-        tmp &= O_NONBLOCK;
+        tmp &= ~O_NONBLOCK;
     }
     fcntl(m_SockFD, F_SETFL, tmp);
 }
@@ -76,7 +76,7 @@ void BaseSocket::bindToHost()
 {
     int ret;
 
-    ret = bind(m_SockFD, (struct sockaddr*) &m_HostAddress, sizeof(struct sockaddr));
+    ret = bind(m_SockFD, reinterpret_cast<struct sockaddr *>(&m_HostAddress), sizeof(struct sockaddr));
     assert(ret != -1);
 }
 
@@ -99,13 +99,14 @@ void BaseSocket::connectToRemote()
 {
     int ret;
 
-    ret = connect(m_SockFD, (struct sockaddr *) &m_RemoteAddress, sizeof(struct sockaddr));
+    ret = connect(m_SockFD, reinterpret_cast<struct sockaddr *>(&m_RemoteAddress), sizeof(struct sockaddr));
     assert(ret != -1);
 }
 
 int BaseSocket::receiveData(char *buffer, int length)
 {
-    return (int) recv(m_SockFD, buffer, (size_t) length, 0);
+
+    return static_cast<int>(recv(m_SockFD, buffer, (size_t) length, 0));
 }
 
 void BaseSocket::closeSocket()
