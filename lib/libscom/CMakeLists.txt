@@ -1,18 +1,15 @@
 add_library(
-        map STATIC
-        src/baseMap.cpp
-        src/fileMap.cpp
-        src/networkMap.cpp
+        scom STATIC
+        src/serverConnectionHandler.cpp
 )
 
 target_include_directories(
-        map
+        scom
         PUBLIC
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/client>
-            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/server>
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_link_libraries(map scom)
+target_link_libraries(scom sock)

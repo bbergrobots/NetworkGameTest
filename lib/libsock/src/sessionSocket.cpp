@@ -13,12 +13,12 @@ SessionSocket::SessionSocket(int sockFieldDescriptor, struct sockaddr_in addr)
     m_SockFD = sockFieldDescriptor;
 }
 
-const char* SessionSocket::getClientAddress()
+const char* SessionSocket::getClientAddress() const
 {
     return inet_ntoa(m_ClientAddress.sin_addr);
 }
 
-unsigned short SessionSocket::getClientPort()
+unsigned short SessionSocket::getClientPort() const
 {
     return ntohs(m_ClientAddress.sin_port);
 }

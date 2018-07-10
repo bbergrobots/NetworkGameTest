@@ -39,7 +39,7 @@ public:
      *
      * This function should not get used for sockets created by the listening for incoming connections.
      */
-    void setNonBlocking(bool state);
+    void setNonBlocking(bool state) const;
 
     /**
      * @brief bind socket to host
@@ -53,12 +53,12 @@ public:
      * @brief get the file descriptor of the socket for debugging purposes
      * @return the file descriptor
      */
-    int getFileDescriptor();
+    int getFileDescriptor() const;
 
     /**
      * @brief close the socket if open
      */
-    void closeSocket();
+    void closeSocket() const;
 
 
 protected:

@@ -27,13 +27,13 @@ public:
      * @brief get a string containing the IPv4 address of the remote host
      * @return string containing the IPv4 address of the remote host
      */
-    const char* getClientAddress();
+    const char* getClientAddress() const;
 
     /**
      * @brief get the port number used by the socket on the remote host
      * @return port number of the socket on the remote host
      */
-    unsigned short getClientPort();
+    unsigned short getClientPort() const;
 
 
 private:

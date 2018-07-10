@@ -1,5 +1,5 @@
-add_subdirectory(libsock)
-add_subdirectory(libmap)
-
 add_subdirectory(slibs)
-add_subdirectory(clibs)
+
+add_subdirectory(libmap)
+add_subdirectory(libscom)
+add_subdirectory(libsock)

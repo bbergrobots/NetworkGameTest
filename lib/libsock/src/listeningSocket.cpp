@@ -15,7 +15,7 @@ ListeningSocket::ListeningSocket(short port)
     startConnectionListening();
 }
 
-SessionSocket* ListeningSocket::acceptConnection()
+SessionSocket* ListeningSocket::acceptConnection() const
 {
     struct sockaddr_in clientAddr{};
     socklen_t sockInSize = sizeof(struct sockaddr_in);
@@ -33,7 +33,7 @@ SessionSocket* ListeningSocket::acceptConnection()
     }
 }
 
-void ListeningSocket::startConnectionListening()
+void ListeningSocket::startConnectionListening() const
 {
     int ret;
 

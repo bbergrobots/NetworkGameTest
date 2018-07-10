@@ -33,7 +33,7 @@ void BaseMap::initRandomly()
     }
 }
 
-void BaseMap::print()
+void BaseMap::print() const
 {
     std::cout << "Printing current map:\n    ";
 
@@ -53,7 +53,7 @@ void BaseMap::print()
     std::cout << '\n';
 }
 
-unsigned char* BaseMap::getMapData()
+unsigned char* BaseMap::getMapData() const
 {
     return m_MapData;
 }

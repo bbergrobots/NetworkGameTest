@@ -23,7 +23,7 @@ public:
      * @param size number of 8x8 chunks per dimension
      * @param filename path to associated file
      */
-    explicit FileMap(unsigned int size, const char* filename);
+    FileMap(unsigned int size, const char* filename);
 
     /**
      * @brief destructor closes file

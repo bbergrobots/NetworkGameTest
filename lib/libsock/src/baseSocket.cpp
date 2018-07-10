@@ -37,7 +37,7 @@ void BaseSocket::init()
     assert(ret != -1);
 }
 
-void BaseSocket::setNonBlocking(bool state)
+void BaseSocket::setNonBlocking(bool state) const
 {
     int tmp;
 
@@ -61,12 +61,12 @@ void BaseSocket::bindToHost(short port)
     assert(ret != -1);
 }
 
-int BaseSocket::getFileDescriptor()
+int BaseSocket::getFileDescriptor() const
 {
     return m_SockFD;
 }
 
-void BaseSocket::closeSocket()
+void BaseSocket::closeSocket() const
 {
     if (m_SockFD != -1)
     {

@@ -24,7 +24,7 @@ public:
      * @retval -1 no new data received
      * @retval 0 lost TCP connection
      */
-    int receiveData(void* buffer, int length);
+    int receiveData(void* buffer, int length) const;
 
     /**
      * @brief send data inside buffer via socket
@@ -33,7 +33,7 @@ public:
      * @return number of bytes sent
      * @retval -1 an error occurred
      */
-    int sendData(const void* buffer, int length);
+    int sendData(const void* buffer, int length) const;
 
 
 };

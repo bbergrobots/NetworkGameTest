@@ -28,7 +28,7 @@ public:
      * @return pointer to new session socket
      * @retval nullptr no new incoming connection
      */
-    SessionSocket* acceptConnection();
+    SessionSocket* acceptConnection() const;
 
 
 private:
@@ -36,7 +36,7 @@ private:
     /**
      * @brief start listening for incoming connections and set non-blocking mode
      */
-    void startConnectionListening();
+    void startConnectionListening() const;
 
 
 };

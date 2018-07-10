@@ -33,13 +33,13 @@ public:
     /**
      * @brief print map data to console
      */
-    void print();
+    void print() const;
 
     /**
      * @brief get raw map data
      * @return pointer to first map byte
      */
-    unsigned char* getMapData();
+    unsigned char* getMapData() const;
 
 
 protected:

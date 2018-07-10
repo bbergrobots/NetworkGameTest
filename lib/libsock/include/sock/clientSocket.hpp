@@ -26,7 +26,7 @@ public:
     /**
      * @brief connect to targeted remote host and set non-blocking mode
      */
-    void establishConnection();
+    void establishConnection() const;
 
 
 private:
