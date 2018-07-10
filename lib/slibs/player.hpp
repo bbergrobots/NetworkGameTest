@@ -18,7 +18,7 @@ class Player
 {
 public:
 
-    Player(SessionSocket* socket);
+    explicit Player(SessionSocket* socket);
 
     ~Player();
 
@@ -26,7 +26,7 @@ public:
 
     bool isClientConnected() const;
 
-    void sendRawData(unsigned char* data, size_t length) const;
+    void sendRawData(unsigned char* data, int length) const;
 
     void sendMap(unsigned char* mapData) const;
 

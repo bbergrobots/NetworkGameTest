@@ -12,9 +12,9 @@
 Player::Player(SessionSocket* socket)
     : m_Socket(socket)
 {
-    std::cout << "Constructing player with FD " << ".\n";
-//    std::cout << "    Address : " << inet_ntoa(m_ClientAddr.sin_addr) << "\n";
-//    std::cout << "    Port    : " << ntohs(m_ClientAddr.sin_port) << "\n";
+    std::cout << "Constructing player with FD " << m_Socket->getFileDescriptor() << ".\n";
+    std::cout << "    Address : " << m_Socket->getClientAddress() << "\n";
+    std::cout << "    Port    : " << m_Socket->getClientPort() << "\n";
 
     m_ClientConnectedMutex.lock();
     m_ClientConnected = true;
@@ -31,7 +31,7 @@ Player::Player(SessionSocket* socket)
 
 Player::~Player()
 {
-    std::cout << "Destructing player with FD " << ".\n";
+    std::cout << "Destructing player with FD " << m_Socket->getFileDescriptor() << ".\n";
 
     // deactivate update thread
     m_RunningMutex.lock();
@@ -39,8 +39,7 @@ Player::~Player()
     m_RunningMutex.unlock();
     m_UpdateThread.join();
 
-//    close(m_SockFD);
-    m_Socket->closeSocket();
+    delete m_Socket;
 }
 
 bool Player::isClientConnected() const
@@ -55,21 +54,20 @@ void Player::update()
 
     while(m_Running && m_ClientConnected)
     {
-//        len = recv(m_SockFD, &buf, 1024, 0);
-        len = m_Socket->receiveData(&buf[0], 1024);
+        len = m_Socket->receiveDate(&buf[0], 1024);
 
         switch (len)
         {
         case -1:
             break;
         case 0:
-            std::cout << "Client with FD " << " disconnected.\n";
+            std::cout << "Client with FD " << m_Socket->getFileDescriptor() << " disconnected.\n";
             m_ClientConnectedMutex.lock();
             m_ClientConnected = false;
             m_ClientConnectedMutex.unlock();
             break;
         default:
-            std::cout << "Receiving message from player with FD " <<":\n    ";
+            std::cout << "Receiving message from player with FD " << m_Socket->getFileDescriptor() << ":\n    ";
             for(ssize_t i = 0; i < len; i++)
             {
                 std::cout << buf[i];
@@ -79,10 +77,9 @@ void Player::update()
     }
 }
 
-void Player::sendRawData(unsigned char *data, size_t length) const
+void Player::sendRawData(unsigned char* data, int length) const
 {
-//    send(m_SockFD, data, length, 0);
-    send(m_Socket->getFD(), data, length, 0);
+    m_Socket->sendData(reinterpret_cast<char*>(data), length);
 }
 
 void Player::sendMap(unsigned char* mapData) const

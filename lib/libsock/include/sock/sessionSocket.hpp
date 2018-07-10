@@ -5,20 +5,19 @@
 #ifndef NETWORKGAMETEST_SESSIONSOCKET_HPP
 #define NETWORKGAMETEST_SESSIONSOCKET_HPP
 
-#include "sock/baseSocket.hpp"
+#include "sock/transmissionSocket.hpp"
 
 
-class SessionSocket : public BaseSocket
+class SessionSocket : public TransmissionSocket
 {
 
 public:
 
     SessionSocket(int sockFD, struct sockaddr_in addr);
 
-    int getFD()
-    {
-        return m_SockFD;
-    }
+    const char* getClientAddress();
+
+    unsigned short getClientPort();
 
 
 private:

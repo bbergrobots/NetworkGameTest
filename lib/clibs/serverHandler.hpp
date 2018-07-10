@@ -8,6 +8,7 @@
 #include "serverRecvHandler.hpp"
 
 #include <sock/baseSocket.hpp>
+#include <sock/clientSocket.hpp>
 
 #include <thread>
 #include <mutex>
@@ -32,7 +33,8 @@ public:
 
 private:
 
-    BaseSocket m_Socket;
+//    BaseSocket m_Socket;
+    ClientSocket m_Socket;
 
     std::thread m_UpdateThread;
 

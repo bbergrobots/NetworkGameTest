@@ -18,34 +18,28 @@ public:
 
     void init();
 
-    void setHostPort(short port);
-
-    void setRemoteAddress(const char* remoteAddress, short remotePort);
+//    void setRemoteAddress(const char* remoteAddress, short remotePort);
 
     void setNonBlocking(bool state);
 
-    void bindToHost();
+    void bindToHost(short port);
+//
+//    void connectToRemote();
+//
+//    int receiveData(char* buffer, int length);
 
-    void listenForConnections();
-
-    int acceptConnection(struct sockaddr* clientAddr);
-
-    void connectToRemote();
-
-    int receiveData(char* buffer, int length);
+    int getFileDescriptor();
 
     void closeSocket();
+
 
 protected:
 
     int m_SockFD;
 
-private:
-
-
     struct sockaddr_in m_HostAddress;
 
-    struct sockaddr_in m_RemoteAddress;
+
 };
 
 

@@ -18,6 +18,12 @@ public:
 
     SessionSocket* acceptConnection();
 
+
+private:
+
+    void startConnectionListening();
+
+
 };
 
 

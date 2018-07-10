@@ -8,12 +8,10 @@
 #include <cstdlib>
 
 
-ServerHandler::ServerHandler(const char *serverAddr, short serverPort)
+ServerHandler::ServerHandler(const char* serverAddr, short serverPort)
+    : m_Socket(serverAddr, serverPort)
 {
-    m_Socket = BaseSocket();
-    m_Socket.init();
-    m_Socket.setRemoteAddress(serverAddr, serverPort);
-    m_Socket.bindToHost();
+
 }
 
 ServerHandler::~ServerHandler()
@@ -28,8 +26,7 @@ ServerHandler::~ServerHandler()
 
 void ServerHandler::activateConnection()
 {
-    m_Socket.connectToRemote();
-    m_Socket.setNonBlocking(true);
+    m_Socket.establishConnection();
 
     m_ServerConnectedMutex.lock();
     m_ServerConnected = true;
@@ -60,7 +57,7 @@ void ServerHandler::update()
 
     while(m_Running && m_ServerConnected)
     {
-        len = m_Socket.receiveData((char*) &buf, 1024);
+        len = m_Socket.receiveDate((char*) &buf[0], 1024);
 
         switch (len)
         {
