@@ -11,6 +11,7 @@
  */
 class BaseMap
 {
+
 public:
 
     /**
@@ -46,17 +47,18 @@ protected:
     /**
      * @brief number of 8x8 chunks per dimension
      */
-    unsigned int mSize;
+    unsigned int m_Size;
 
     /**
      * @brief number of bytes needed by the map
      */
-     unsigned int mByteNo;
+     unsigned int m_ByteNo;
 
     /**
      * @brief bytes of raw map data
      */
-    unsigned char* mMapData;
+    unsigned char* m_MapData;
+
 
 };
 

@@ -15,6 +15,7 @@
  */
 class FileMap : public BaseMap
 {
+
 public:
 
     /**
@@ -38,8 +39,9 @@ public:
 
     /**
      * @brief load map from file to memory
-     * @return 0 success
-     * @return -1 failure
+     * @return success or failure
+     * @retval 0 success
+     * @retval -1 failure
      */
     int loadFromFile();
 
@@ -55,7 +57,7 @@ private:
     /**
      * @brief associated file
      */
-    std::fstream mFile;
+    std::fstream m_File;
 
 };
 

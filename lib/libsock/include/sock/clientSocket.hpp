@@ -8,18 +8,32 @@
 #include "sock/transmissionSocket.hpp"
 
 
+/**
+ * @brief class that represents a single socket that is capable of connecting to a remote host
+ */
 class ClientSocket : public TransmissionSocket
 {
 
 public:
 
-    ClientSocket(const char* serverAddr, short serverPort);
+    /**
+     * @brief constructor sets information about the targeted remote host and binds the socket to a free host port
+     * @param serverAddress string containing the IPv4 address of the targeted remote host
+     * @param serverPort targeted port on the remote host
+     */
+    ClientSocket(const char* serverAddress, short serverPort);
 
+    /**
+     * @brief connect to targeted remote host and set non-blocking mode
+     */
     void establishConnection();
 
 
 private:
 
+    /**
+     * @brief remote address information
+     */
     sockaddr_in m_ServerAddr;
 
 

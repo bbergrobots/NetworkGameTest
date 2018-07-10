@@ -8,11 +8,11 @@
 #include <cassert>
 
 
-ClientSocket::ClientSocket(const char* serverAddr, short serverPort)
+ClientSocket::ClientSocket(const char* serverAddress, short serverPort)
     : TransmissionSocket()
 {
     struct in_addr serverInAddr{};
-    inet_aton(serverAddr, &serverInAddr);
+    inet_aton(serverAddress, &serverInAddr);
 
     m_ServerAddr.sin_family = AF_INET;
     m_ServerAddr.sin_addr = serverInAddr;

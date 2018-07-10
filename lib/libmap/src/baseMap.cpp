@@ -10,16 +10,16 @@
 
 
 BaseMap::BaseMap(unsigned int size)
-    : mSize(size)
+    : m_Size(size)
 {
-    mByteNo = 8 * mSize * mSize;
-    mMapData = new unsigned char[mByteNo];
-    memset(mMapData, '\0', mByteNo);
+    m_ByteNo = 8 * m_Size * m_Size;
+    m_MapData = new unsigned char[m_ByteNo];
+    memset(m_MapData, '\0', m_ByteNo);
 }
 
 BaseMap::~BaseMap()
 {
-    delete mMapData;
+    delete m_MapData;
 }
 
 void BaseMap::initRandomly()
@@ -27,9 +27,9 @@ void BaseMap::initRandomly()
     std::default_random_engine engine;
     std::uniform_int_distribution<unsigned char> distribution(0, 255);
 
-    for (int i = 0; i < mByteNo; i++)
+    for (int i = 0; i < m_ByteNo; i++)
     {
-        mMapData[i] = distribution(engine);
+        m_MapData[i] = distribution(engine);
     }
 }
 
@@ -37,14 +37,14 @@ void BaseMap::print()
 {
     std::cout << "Printing current map:\n    ";
 
-    for (int i = 0; i < mByteNo; i++)
+    for (int i = 0; i < m_ByteNo; i++)
     {
         for (int j = 7; j >= 0; j--)
         {
-            std::cout << (mMapData[i] >> j & 1);
+            std::cout << (m_MapData[i] >> j & 1);
         }
 
-        if ((i + 1) % mSize == 0)
+        if ((i + 1) % m_Size == 0)
         {
             std::cout << "\n    ";
         }
@@ -55,5 +55,5 @@ void BaseMap::print()
 
 unsigned char* BaseMap::getMapData()
 {
-    return mMapData;
+    return m_MapData;
 }

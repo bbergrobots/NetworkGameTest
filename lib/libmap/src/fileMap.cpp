@@ -22,7 +22,7 @@ FileMap::FileMap(unsigned int size, const char *filename)
         isFileNew = true;
     }
 
-    mFile.open(filename, std::ios::in | std::ios::out | std::ios::binary);
+    m_File.open(filename, std::ios::in | std::ios::out | std::ios::binary);
 
     if (isFileNew)
     {
@@ -36,21 +36,21 @@ FileMap::FileMap(unsigned int size, const char *filename)
 
     print();
 
-    mFile.seekg(0);
-    mFile.seekp(0);
+    m_File.seekg(0);
+    m_File.seekp(0);
 }
 
 FileMap::~FileMap()
 {
-    mFile.close();
+    m_File.close();
 }
 
 int FileMap::saveToFile()
 {
-    if (mFile.is_open())
+    if (m_File.is_open())
     {
-        mFile.seekp(0);
-        mFile.write(reinterpret_cast<char*>(mMapData), mByteNo);
+        m_File.seekp(0);
+        m_File.write(reinterpret_cast<char*>(m_MapData), m_ByteNo);
 
         return 0;
     }
@@ -60,17 +60,17 @@ int FileMap::saveToFile()
 
 int FileMap::loadFromFile()
 {
-    if (mFile.is_open())
+    if (m_File.is_open())
     {
-        if (getFileSize() < mByteNo)
+        if (getFileSize() < m_ByteNo)
         {
             initRandomly();
             saveToFile();
         }
         else
         {
-            mFile.seekg(0);
-            mFile.read(reinterpret_cast<char*>(mMapData), mByteNo);
+            m_File.seekg(0);
+            m_File.read(reinterpret_cast<char*>(m_MapData), m_ByteNo);
         }
 
         return 0;
@@ -81,11 +81,11 @@ int FileMap::loadFromFile()
 
 int FileMap::getFileSize()
 {
-    if (mFile.is_open())
+    if (m_File.is_open())
     {
-        mFile.seekg(0, std::ios::end);
+        m_File.seekg(0, std::ios::end);
 
-        return static_cast<int>(mFile.tellg());
+        return static_cast<int>(m_File.tellg());
     }
 
     return -1;

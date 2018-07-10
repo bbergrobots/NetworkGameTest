@@ -54,7 +54,7 @@ void Player::update()
 
     while(m_Running && m_ClientConnected)
     {
-        len = m_Socket->receiveDate(&buf[0], 1024);
+        len = m_Socket->receiveData(&buf[0], 1024);
 
         switch (len)
         {

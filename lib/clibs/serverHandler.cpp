@@ -57,7 +57,7 @@ void ServerHandler::update()
 
     while(m_Running && m_ServerConnected)
     {
-        len = m_Socket.receiveDate((char*) &buf[0], 1024);
+        len = m_Socket.receiveData((char*) &buf[0], 1024);
 
         switch (len)
         {
@@ -87,8 +87,8 @@ void ServerHandler::update()
                 }
             }
 
-//            const char *msg = "Hello, world!";
-//            send(m_SockFD, msg, 13, 0);
+            const char *msg = "Hello, world!";
+            m_Socket.sendData(msg, 13);
         }
     }
 }
