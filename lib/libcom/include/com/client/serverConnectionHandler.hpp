@@ -5,7 +5,7 @@
 #ifndef NETWORKGAMETEST_SERVERCONNECTIONHANDLER_HPP
 #define NETWORKGAMETEST_SERVERCONNECTIONHANDLER_HPP
 
-#include "com/messageReceiver.hpp"
+#include "com/messageReceiverInterface.hpp"
 #include "com/messageContainer.hpp"
 
 #include <sock/clientSocket.hpp>
@@ -23,7 +23,7 @@ public:
 
     ~ServerConnectionHandler();
 
-    void registerServerMessageReceiver(MessageReceiver* serverMessageReceiver);
+    void registerServerMessageReceiver(MessageReceiverInterface* serverMessageReceiver);
 
     void establishConnection();
 
@@ -40,7 +40,7 @@ private:
 
     bool m_ServerConnected;
 
-    std::list<MessageReceiver*> m_ServerMessageReceiver;
+    std::list<MessageReceiverInterface*> m_ServerMessageReceiver;
 
     std::list<MessageContainer> m_MessageDispatchQueue;
 

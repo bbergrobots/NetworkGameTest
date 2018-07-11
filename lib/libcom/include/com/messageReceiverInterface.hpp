@@ -10,7 +10,7 @@
 #include <cstdlib>
 
 
-class MessageReceiver
+class MessageReceiverInterface
 {
 
 public:

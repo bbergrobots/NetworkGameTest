@@ -2,13 +2,13 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "com/receiveBufferQueue.hpp"
+#include "com/receiveQueue.hpp"
 
 #include <cassert>
 #include <cstring>
 
 
-ReceiveBufferQueue::ReceiveBufferQueue(int bufferSize)
+ReceiveQueue::ReceiveQueue(int bufferSize)
     : m_BufferSize(bufferSize)
 {
     m_Buffer = new char[m_BufferSize];
@@ -16,12 +16,12 @@ ReceiveBufferQueue::ReceiveBufferQueue(int bufferSize)
     m_Cursor = 0;
 }
 
-ReceiveBufferQueue::~ReceiveBufferQueue()
+ReceiveQueue::~ReceiveQueue()
 {
     delete m_Buffer;
 }
 
-int ReceiveBufferQueue::receive(TransmissionSocket* socket)
+int ReceiveQueue::receive(TransmissionSocket* socket)
 {
     int availableBytes = getAvailableBytes();
     int receivedBytes = socket->receiveData(m_Buffer + m_Cursor, availableBytes);
@@ -35,14 +35,14 @@ int ReceiveBufferQueue::receive(TransmissionSocket* socket)
     return receivedBytes;
 }
 
-bool ReceiveBufferQueue::messageReadyForProcessing()
+bool ReceiveQueue::messageReadyForProcessing()
 {
     unsigned short messageSize = getFirstDataSize();
 
     return ((m_Cursor >= messageSize + 3) && (messageSize != 0));
 }
 
-void ReceiveBufferQueue::encloseMessage(MessageContainer* messageContainer)
+void ReceiveQueue::getMessage(MessageContainer* messageContainer)
 {
     if (messageReadyForProcessing())
     {
@@ -61,12 +61,12 @@ void ReceiveBufferQueue::encloseMessage(MessageContainer* messageContainer)
     }
 }
 
-int ReceiveBufferQueue::getAvailableBytes()
+int ReceiveQueue::getAvailableBytes()
 {
     return m_BufferSize - m_Cursor;
 }
 
-unsigned short ReceiveBufferQueue::getFirstDataSize()
+unsigned short ReceiveQueue::getFirstDataSize()
 {
     unsigned short size;
 
@@ -84,7 +84,7 @@ unsigned short ReceiveBufferQueue::getFirstDataSize()
     return size;
 }
 
-unsigned char ReceiveBufferQueue::getFirstHeader()
+unsigned char ReceiveQueue::getFirstHeader()
 {
     return static_cast<unsigned char>(m_Buffer[2]);
 }

@@ -2,16 +2,16 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "playercon/server/playerConnection.hpp"
+#include "plctrl/server/playerConnection.hpp"
 
 #include <com/messageContainer.hpp>
-#include <com/receiveBufferQueue.hpp>
+#include <com/receiveQueue.hpp>
 
 #include <iostream>
 
 
 PlayerConnection::PlayerConnection(SessionSocket* socket)
-    : m_Socket(socket)
+    : m_Socket(socket), m_SendQueue(8192)
 {
     std::cout << "Construct player with file descriptor " << m_Socket->getFileDescriptor() << ":\n";
     std::cout << "   Address: " << m_Socket->getClientAddress() << '\n';
@@ -43,7 +43,7 @@ bool PlayerConnection::isClientConnected()
 void PlayerConnection::update()
 {
     MessageContainer msgContainer(1024);
-    ReceiveBufferQueue recvBuffer(4096);
+    ReceiveQueue recvBuffer(4096);
 
     while (m_Running && m_ClientConnected)
     {
@@ -56,8 +56,13 @@ void PlayerConnection::update()
         {
             while (recvBuffer.messageReadyForProcessing())
             {
-                recvBuffer.encloseMessage(&msgContainer);
+                recvBuffer.getMessage(&msgContainer);
                 msgContainer.print();
+            }
+
+            if (m_SendQueue.messageReadyForSending())
+            {
+                m_SendQueue.send(m_Socket);
             }
         }
     }

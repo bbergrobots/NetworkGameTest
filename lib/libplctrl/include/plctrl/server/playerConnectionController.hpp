@@ -5,7 +5,7 @@
 #ifndef NETWORKGAMETEST_PLAYERCONNECTIONCONTROLLER_HPP
 #define NETWORKGAMETEST_PLAYERCONNECTIONCONTROLLER_HPP
 
-#include "playercon/server/playerConnection.hpp"
+#include "plctrl/server/playerConnection.hpp"
 
 #include <com/server/clientConnectionHandler.hpp>
 

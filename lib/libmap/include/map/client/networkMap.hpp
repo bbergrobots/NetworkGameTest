@@ -7,10 +7,10 @@
 
 #include "map/baseMap.hpp"
 
-#include <com/messageReceiver.hpp>
+#include <com/messageReceiverInterface.hpp>
 
 
-class NetworkMap : public BaseMap, public MessageReceiver
+class NetworkMap : public BaseMap, public MessageReceiverInterface
 {
 
 public:

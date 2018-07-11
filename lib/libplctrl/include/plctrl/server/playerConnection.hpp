@@ -6,6 +6,8 @@
 #define NETWORKGAMETEST_PLAYERCONNECTION_HPP
 
 #include <sock/sessionSocket.hpp>
+#include <com/sendQueue.hpp>
+#include <com/messageContainer.hpp>
 
 #include <thread>
 
@@ -20,6 +22,11 @@ public:
     ~PlayerConnection();
 
     bool isClientConnected();
+
+
+protected:
+
+    SendQueue m_SendQueue;
 
 
 private:

@@ -2,8 +2,9 @@ add_library(
         com STATIC
         src/serverConnectionHandler.cpp
         src/messageContainer.cpp
-        src/receiveBufferQueue.cpp
+        src/receiveQueue.cpp
         src/clientConnectionHandler.cpp
+        src/sendQueue.cpp
 )
 
 target_include_directories(

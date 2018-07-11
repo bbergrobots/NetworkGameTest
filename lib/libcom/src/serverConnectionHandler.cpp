@@ -4,7 +4,7 @@
 
 #include "com/client/serverConnectionHandler.hpp"
 
-#include "com/receiveBufferQueue.hpp"
+#include "com/receiveQueue.hpp"
 
 #include <iostream>
 
@@ -21,7 +21,7 @@ ServerConnectionHandler::~ServerConnectionHandler()
     m_UpdateThread.join();
 }
 
-void ServerConnectionHandler::registerServerMessageReceiver(MessageReceiver* serverMessageReceiver)
+void ServerConnectionHandler::registerServerMessageReceiver(MessageReceiverInterface* serverMessageReceiver)
 {
     m_ServerMessageReceiver.push_back(serverMessageReceiver);
 }
@@ -44,7 +44,7 @@ bool ServerConnectionHandler::isServerConnected() const
 void ServerConnectionHandler::update()
 {
     MessageContainer msgContainer(1024);
-    ReceiveBufferQueue recvBuffer(4096);
+    ReceiveQueue recvBuffer(4096);
 
 
     while (m_Running && m_ServerConnected)
@@ -58,7 +58,7 @@ void ServerConnectionHandler::update()
         {
             while (recvBuffer.messageReadyForProcessing())
             {
-                recvBuffer.encloseMessage(&msgContainer);
+                recvBuffer.getMessage(&msgContainer);
                 msgContainer.print();
 
                 for (auto smr : m_ServerMessageReceiver)

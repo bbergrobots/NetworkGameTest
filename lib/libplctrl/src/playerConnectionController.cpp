@@ -2,7 +2,9 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "playercon/server/playerConnectionController.hpp"
+#include "plctrl/server/playerConnectionController.hpp"
+
+#include "plctrl/server/playerController.hpp"
 
 
 PlayerConnectionController::PlayerConnectionController(unsigned short hostPort)
@@ -32,8 +34,8 @@ void PlayerConnectionController::update()
     {
         if (m_ClientConnectionHandler.newClientAvailable())
         {
-            auto newPlayerConnection = new PlayerConnection(m_ClientConnectionHandler.getNewClient());
-            m_PlayerConnections.push_back(newPlayerConnection);
+            auto newPlayerController = new PlayerController(m_ClientConnectionHandler.getNewClient());
+            m_PlayerConnections.push_back(newPlayerController);
         }
 
         for (auto it = m_PlayerConnections.begin(); it != m_PlayerConnections.end(); it++)

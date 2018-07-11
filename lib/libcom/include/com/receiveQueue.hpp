@@ -2,28 +2,29 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#ifndef NETWORKGAMETEST_RECEIVEBUFFERQUEUE_HPP
-#define NETWORKGAMETEST_RECEIVEBUFFERQUEUE_HPP
+#ifndef NETWORKGAMETEST_RECEIVEQUEUE_HPP
+#define NETWORKGAMETEST_RECEIVEQUEUE_HPP
 
 #include "com/messageContainer.hpp"
 
 #include <sock/transmissionSocket.hpp>
 
 
-class ReceiveBufferQueue
+// TODO: add TransmissionQueue base class
+class ReceiveQueue
 {
 
 public:
 
-    explicit ReceiveBufferQueue(int bufferSize);
+    explicit ReceiveQueue(int bufferSize);
 
-    ~ReceiveBufferQueue();
+    ~ReceiveQueue();
 
     int receive(TransmissionSocket* socket);
 
     bool messageReadyForProcessing();
 
-    void encloseMessage(MessageContainer* messageContainer);
+    void getMessage(MessageContainer* messageContainer);
 
 
 private:
@@ -44,4 +45,4 @@ private:
 };
 
 
-#endif //NETWORKGAMETEST_RECEIVEBUFFERQUEUE_HPP
+#endif //NETWORKGAMETEST_RECEIVEQUEUE_HPP
