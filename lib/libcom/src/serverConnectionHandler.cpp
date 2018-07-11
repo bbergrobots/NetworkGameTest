@@ -49,7 +49,6 @@ void ServerConnectionHandler::update()
 
     while (m_Running && m_ServerConnected)
     {
-
         if (recvBuffer.receive(&m_Socket) == 0)
         {
             std::cout << "Server disconnected!\n\n";

@@ -3,6 +3,7 @@ add_library(
         src/serverConnectionHandler.cpp
         src/messageContainer.cpp
         src/receiveBufferQueue.cpp
+        src/clientConnectionHandler.cpp
 )
 
 target_include_directories(
@@ -10,6 +11,7 @@ target_include_directories(
         PUBLIC
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/client>
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/server>
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/src
 )

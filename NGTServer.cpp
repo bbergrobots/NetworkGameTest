@@ -3,7 +3,7 @@
 //
 
 #include <map/server/fileMap.hpp>
-#include <playerHandler.hpp>
+#include <playercon/server/playerConnectionController.hpp>
 
 #include <iostream>
 #include <thread>
@@ -16,12 +16,13 @@ int main()
     std::cout << "===========================\n\n";
 
     FileMap map(2, "map.bin");
-    PlayerHandler playerHandler(&map);
 
-    auto t = std::chrono::seconds(180);
+    PlayerConnectionController playerConnectionController(1337);
+
+    auto t = std::chrono::seconds(20);
     std::this_thread::sleep_for(t);
 
-    std::cout << "Terminating server execution\n";
+    std::cout << "Terminate server execution\n\n";
 
     return 0;
 }
