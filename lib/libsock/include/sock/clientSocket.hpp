@@ -21,7 +21,7 @@ public:
      * @param serverAddress string containing the IPv4 address of the targeted remote host
      * @param serverPort targeted port on the remote host
      */
-    ClientSocket(const char* serverAddress, short serverPort);
+    ClientSocket(const char* serverAddress, unsigned short serverPort);
 
     /**
      * @brief connect to targeted remote host and set non-blocking mode

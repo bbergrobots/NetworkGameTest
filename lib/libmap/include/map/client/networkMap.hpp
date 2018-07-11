@@ -7,19 +7,19 @@
 
 #include "map/baseMap.hpp"
 
-#include <scom/client/serverMessageReceiver.hpp>
+#include <com/messageReceiver.hpp>
 
 
-class NetworkMap : public BaseMap, public ServerMessageReceiver
+class NetworkMap : public BaseMap, public MessageReceiver
 {
 
 public:
 
     explicit NetworkMap(unsigned int size);
 
-    bool canProcessData(unsigned short header, int length) const override;
+    bool canProcessData(MessageContainer* msg) const override;
 
-    void processData(void* rawData, int length) override;
+    void processData(MessageContainer* msg) override;
 };
 
 

@@ -35,7 +35,7 @@ void BaseMap::initRandomly()
 
 void BaseMap::print() const
 {
-    std::cout << "Printing current map:\n    ";
+    std::cout << "Print current map:\n            ";
 
     for (int i = 0; i < m_ByteNo; i++)
     {
@@ -46,7 +46,7 @@ void BaseMap::print() const
 
         if ((i + 1) % m_Size == 0)
         {
-            std::cout << "\n    ";
+            std::cout << "\n            ";
         }
     }
 

@@ -9,7 +9,7 @@ add_executable(NetworkGameTestServer NGTServer.cpp)
 add_executable(NetworkGameTestClient NGTClient.cpp)
 
 target_link_libraries(NetworkGameTestServer PUBLIC slibs sock map)
-target_link_libraries(NetworkGameTestClient PUBLIC sock map scom)
+target_link_libraries(NetworkGameTestClient PUBLIC sock map com)
 
 add_custom_target(All)
 add_dependencies(All NetworkGameTestServer NetworkGameTestClient)

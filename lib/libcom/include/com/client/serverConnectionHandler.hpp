@@ -5,7 +5,8 @@
 #ifndef NETWORKGAMETEST_SERVERCONNECTIONHANDLER_HPP
 #define NETWORKGAMETEST_SERVERCONNECTIONHANDLER_HPP
 
-#include "serverMessageReceiver.hpp"
+#include "com/messageReceiver.hpp"
+#include "com/messageContainer.hpp"
 
 #include <sock/clientSocket.hpp>
 
@@ -18,11 +19,11 @@ class ServerConnectionHandler
 
 public:
 
-    ServerConnectionHandler(const char* serverAddress, short serverPort);
+    ServerConnectionHandler(const char* serverAddress, unsigned short serverPort);
 
     ~ServerConnectionHandler();
 
-    void registerServerMessageReceiver(ServerMessageReceiver* serverMessageReceiver);
+    void registerServerMessageReceiver(MessageReceiver* serverMessageReceiver);
 
     void establishConnection();
 
@@ -39,12 +40,11 @@ private:
 
     bool m_ServerConnected;
 
-    std::list<ServerMessageReceiver*> m_ServerMessageReceiver;
+    std::list<MessageReceiver*> m_ServerMessageReceiver;
+
+    std::list<MessageContainer> m_MessageDispatchQueue;
 
     void update();
-
-    // TODO: remove
-    void printReceiveBuffer(unsigned char *rawData, int length) const;
 
 
 };

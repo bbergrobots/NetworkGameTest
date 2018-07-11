@@ -8,7 +8,7 @@
 #include <cassert>
 
 
-ClientSocket::ClientSocket(const char* serverAddress, short serverPort)
+ClientSocket::ClientSocket(const char* serverAddress, unsigned short serverPort)
     : TransmissionSocket()
 {
     struct in_addr serverInAddr{};

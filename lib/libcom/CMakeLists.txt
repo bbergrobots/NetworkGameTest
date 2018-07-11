@@ -1,10 +1,12 @@
 add_library(
-        scom STATIC
+        com STATIC
         src/serverConnectionHandler.cpp
+        src/messageContainer.cpp
+        src/receiveBufferQueue.cpp
 )
 
 target_include_directories(
-        scom
+        com
         PUBLIC
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
             $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/client>
@@ -12,4 +14,4 @@ target_include_directories(
             ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_link_libraries(scom sock)
+target_link_libraries(com sock)

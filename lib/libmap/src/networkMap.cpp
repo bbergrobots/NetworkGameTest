@@ -13,24 +13,16 @@ NetworkMap::NetworkMap(unsigned int size)
     print();
 }
 
-bool NetworkMap::canProcessData(unsigned short header, int length) const
+bool NetworkMap::canProcessData(MessageContainer* msg) const
 {
-    if (header >> 8u == 0x10)
-    {
-        if (length == m_ByteNo)
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return ((msg->getHeader() == 0x10) && (msg->getDataSize() == m_ByteNo));
 }
 
-void NetworkMap::processData(void* rawData, int length)
+void NetworkMap::processData(MessageContainer* msg)
 {
-    if (length == m_ByteNo)
+    if (canProcessData(msg))
     {
-        memcpy(m_MapData, static_cast<char*>(rawData) + 2, static_cast<size_t>(m_ByteNo));
+        memcpy(m_MapData, msg->getBufferStart(), static_cast<size_t>(m_ByteNo));
         print();
     }
 }

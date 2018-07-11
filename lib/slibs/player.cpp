@@ -84,10 +84,12 @@ void Player::sendRawData(unsigned char* data, int length) const
 
 void Player::sendMap(unsigned char* mapData) const
 {
-    auto data = new unsigned char[16 * 2 + 2];
-    memcpy(data + 2, mapData, 16 * 2);
-    memset(data, 0x00, 2);
-    data[0] = 0x10;
+    auto data = new unsigned char[16 * 2 + 3];
+    memcpy(data + 3, mapData, 16 * 2);
+    memset(data, 0, 3);
+    data[0] = 0;
+    data[1] = 32;
+    data[2] = 0x10;
 
-    sendRawData(data, 16 * 2 + 2);
+    sendRawData(data, 16 * 2 + 3);
 }
