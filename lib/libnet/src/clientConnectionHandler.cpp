@@ -2,7 +2,7 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "com/server/clientConnectionHandler.hpp"
+#include "net/server/clientConnectionHandler.hpp"
 
 
 ClientConnectionHandler::ClientConnectionHandler(unsigned short hostPort)

@@ -2,7 +2,7 @@
 // Created by Brendan Berg on 10.06.18.
 //
 
-#include <com/client/serverConnectionHandler.hpp>
+#include <net/client/serverConnectionHandler.hpp>
 #include <map/client/networkMap.hpp>
 
 #include <iostream>

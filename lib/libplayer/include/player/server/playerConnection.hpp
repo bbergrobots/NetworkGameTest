@@ -6,8 +6,8 @@
 #define NETWORKGAMETEST_PLAYERCONNECTION_HPP
 
 #include <sock/sessionSocket.hpp>
-#include <com/sendQueue.hpp>
-#include <com/messageContainer.hpp>
+#include <net/sendQueue.hpp>
+#include <net/messageContainer.hpp>
 
 #include <thread>
 

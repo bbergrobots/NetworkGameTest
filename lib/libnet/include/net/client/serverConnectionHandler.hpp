@@ -5,8 +5,8 @@
 #ifndef NETWORKGAMETEST_SERVERCONNECTIONHANDLER_HPP
 #define NETWORKGAMETEST_SERVERCONNECTIONHANDLER_HPP
 
-#include "com/messageReceiverInterface.hpp"
-#include "com/messageContainer.hpp"
+#include "net/messageReceiverInterface.hpp"
+#include "net/messageContainer.hpp"
 
 #include <sock/clientSocket.hpp>
 

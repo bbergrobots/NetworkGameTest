@@ -2,9 +2,9 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "plctrl/server/playerConnectionController.hpp"
+#include "player/server/playerConnectionController.hpp"
 
-#include "plctrl/server/playerController.hpp"
+#include "player/server/playerController.hpp"
 
 
 PlayerConnectionController::PlayerConnectionController(unsigned short hostPort)

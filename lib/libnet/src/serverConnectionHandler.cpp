@@ -2,9 +2,9 @@
 // Created by Brendan Berg on 10.07.18.
 //
 
-#include "com/client/serverConnectionHandler.hpp"
+#include "net/client/serverConnectionHandler.hpp"
 
-#include "com/receiveQueue.hpp"
+#include "net/receiveQueue.hpp"
 
 #include <iostream>
 

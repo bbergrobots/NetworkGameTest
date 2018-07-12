@@ -2,10 +2,10 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "plctrl/server/playerConnection.hpp"
+#include "player/server/playerConnection.hpp"
 
-#include <com/messageContainer.hpp>
-#include <com/receiveQueue.hpp>
+#include <net/messageContainer.hpp>
+#include <net/receiveQueue.hpp>
 
 #include <iostream>
 

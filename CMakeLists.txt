@@ -8,8 +8,8 @@ add_subdirectory(lib)
 add_executable(NetworkGameTestServer NGTServer.cpp)
 add_executable(NetworkGameTestClient NGTClient.cpp)
 
-target_link_libraries(NetworkGameTestServer PUBLIC sock map plctrl)
-target_link_libraries(NetworkGameTestClient PUBLIC sock map com)
+target_link_libraries(NetworkGameTestServer PUBLIC map player)
+target_link_libraries(NetworkGameTestClient PUBLIC map net)
 
 add_custom_target(All)
 add_dependencies(All NetworkGameTestServer NetworkGameTestClient)

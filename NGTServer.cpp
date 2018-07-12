@@ -3,7 +3,7 @@
 //
 
 #include <map/server/fileMap.hpp>
-#include <plctrl/server/playerConnectionController.hpp>
+#include <player/server/playerConnectionController.hpp>
 
 #include <iostream>
 #include <thread>

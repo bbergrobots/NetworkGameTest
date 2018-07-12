@@ -2,7 +2,7 @@
 // Created by Brendan Berg on 10.07.18.
 //
 
-#include "com/messageContainer.hpp"
+#include "net/messageContainer.hpp"
 
 #include <iostream>
 

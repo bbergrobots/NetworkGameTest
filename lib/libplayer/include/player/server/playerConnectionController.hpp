@@ -5,9 +5,9 @@
 #ifndef NETWORKGAMETEST_PLAYERCONNECTIONCONTROLLER_HPP
 #define NETWORKGAMETEST_PLAYERCONNECTIONCONTROLLER_HPP
 
-#include "plctrl/server/playerConnection.hpp"
+#include "player/server/playerConnection.hpp"
 
-#include <com/server/clientConnectionHandler.hpp>
+#include <net/server/clientConnectionHandler.hpp>
 
 #include <list>
 #include <thread>
@@ -18,7 +18,7 @@ class PlayerConnectionController
 
 public:
 
-    PlayerConnectionController(unsigned short hostPort);
+    explicit PlayerConnectionController(unsigned short hostPort);
 
     ~PlayerConnectionController();
 

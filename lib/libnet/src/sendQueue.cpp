@@ -2,7 +2,7 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "com/sendQueue.hpp"
+#include "net/sendQueue.hpp"
 
 
 SendQueue::SendQueue(int bufferSize)

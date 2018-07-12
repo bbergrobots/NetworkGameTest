@@ -1,12 +1,12 @@
 add_library(
-        plctrl STATIC
+        player STATIC
         src/playerConnection.cpp
         src/playerConnectionController.cpp
         src/playerController.cpp
 )
 
 target_include_directories(
-        plctrl
+        player
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/server>
@@ -14,4 +14,4 @@ target_include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_link_libraries(plctrl com sock)
+target_link_libraries(player net sock)

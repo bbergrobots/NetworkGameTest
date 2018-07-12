@@ -5,7 +5,7 @@
 #ifndef NETWORKGAMETEST_SENDQUEUE_HPP
 #define NETWORKGAMETEST_SENDQUEUE_HPP
 
-#include "com/messageContainer.hpp"
+#include "net/messageContainer.hpp"
 
 #include <sock/transmissionSocket.hpp>
 

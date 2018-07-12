@@ -5,7 +5,7 @@
 #ifndef NETWORKGAMETEST_PLAYERCONTROLLER_HPP
 #define NETWORKGAMETEST_PLAYERCONTROLLER_HPP
 
-#include "plctrl/server/playerConnection.hpp"
+#include "player/server/playerConnection.hpp"
 
 
 class PlayerController : public PlayerConnection

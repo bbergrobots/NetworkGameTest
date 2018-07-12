@@ -5,7 +5,7 @@
 #ifndef NETWORKGAMETEST_MESSAGERECEIVER_HPP
 #define NETWORKGAMETEST_MESSAGERECEIVER_HPP
 
-#include "com/messageContainer.hpp"
+#include "net/messageContainer.hpp"
 
 #include <cstdlib>
 
