@@ -3,8 +3,9 @@
 //
 
 #include <map/server/fileMap.hpp>
-#include <player/server/playerConnectionController.hpp>
+#include <player/server/playerCollection.hpp>
 
+#include <chrono>
 #include <iostream>
 #include <thread>
 
@@ -16,11 +17,15 @@ int main()
     std::cout << "===========================\n\n";
 
     FileMap map(2, "map.bin");
+    PlayerCollection playerCollection(new PlayerListener(1337));
 
-    PlayerConnectionController playerConnectionController(1337);
+    auto start = std::chrono::system_clock::now();
+    auto end = start + std::chrono::seconds(60);
 
-    auto t = std::chrono::seconds(20);
-    std::this_thread::sleep_for(t);
+    while (std::chrono::system_clock::now() < end)
+    {
+        playerCollection.update();
+    }
 
     std::cout << "Terminate server execution\n\n";
 

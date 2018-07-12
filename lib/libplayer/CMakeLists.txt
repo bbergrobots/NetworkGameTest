@@ -1,8 +1,9 @@
 add_library(
         player STATIC
-        src/playerConnection.cpp
-        src/playerConnectionController.cpp
-        src/playerController.cpp
+        src/player.cpp
+        src/playerCollection.cpp
+        src/playerListener.cpp
+        src/playerNetworkComponent.cpp
 )
 
 target_include_directories(
