@@ -31,7 +31,7 @@ public:
     void initRandomly();
 
     /**
-     * @brief print map data to console
+     * @brief print map data in the console
      */
     void print() const;
 
@@ -50,12 +50,12 @@ protected:
     unsigned int m_Size;
 
     /**
-     * @brief number of bytes needed by the map
+     * @brief number of bytes the map needs
      */
      unsigned int m_ByteNo;
 
     /**
-     * @brief bytes of raw map data
+     * @brief buffer for raw map data
      */
     unsigned char* m_MapData;
 

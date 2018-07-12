@@ -2,10 +2,10 @@
 // Created by Brendan Berg on 11.07.18.
 //
 
-#include "net/server/clientConnectionHandler.hpp"
+#include "net/server/serverConnectionController.hpp"
 
 
-ClientConnectionHandler::ClientConnectionHandler(unsigned short hostPort)
+ServerConnectionController::ServerConnectionController(unsigned short hostPort)
     : m_Socket(hostPort)
 {
     m_Running = true;
@@ -14,7 +14,7 @@ ClientConnectionHandler::ClientConnectionHandler(unsigned short hostPort)
     });
 }
 
-ClientConnectionHandler::~ClientConnectionHandler()
+ServerConnectionController::~ServerConnectionController()
 {
     m_Running = false;
     m_UpdateThread.join();
@@ -28,7 +28,7 @@ ClientConnectionHandler::~ClientConnectionHandler()
     m_NewSessionSocketsMtx.unlock();
 }
 
-bool ClientConnectionHandler::newClientAvailable()
+bool ServerConnectionController::newClientAvailable()
 {
     bool ret;
 
@@ -39,7 +39,7 @@ bool ClientConnectionHandler::newClientAvailable()
     return ret;
 }
 
-SessionSocket* ClientConnectionHandler::getNewClient()
+SessionSocket* ServerConnectionController::getNewClient()
 {
     SessionSocket* ret = nullptr;
 
@@ -54,7 +54,7 @@ SessionSocket* ClientConnectionHandler::getNewClient()
     return ret;
 }
 
-void ClientConnectionHandler::update()
+void ServerConnectionController::update()
 {
     SessionSocket* newSocket;
 

@@ -7,10 +7,10 @@
 #include <arpa/inet.h>
 
 
-SessionSocket::SessionSocket(int sockFieldDescriptor, struct sockaddr_in addr)
-    : TransmissionSocket(), m_ClientAddress(addr)
+SessionSocket::SessionSocket(int socketFieldDescriptor, struct sockaddr_in clientAddress)
+    : TransmissionSocket(), m_ClientAddress(clientAddress)
 {
-    m_SockFD = sockFieldDescriptor;
+    m_SockFD = socketFieldDescriptor;
 }
 
 const char* SessionSocket::getClientAddress() const

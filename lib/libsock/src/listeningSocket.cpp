@@ -7,11 +7,11 @@
 #include <cassert>
 
 
-ListeningSocket::ListeningSocket(short port)
+ListeningSocket::ListeningSocket(short hostPort)
     : BaseSocket()
 {
     init();
-    bindToHost(port);
+    bindToHost(hostPort);
     startConnectionListening();
 }
 

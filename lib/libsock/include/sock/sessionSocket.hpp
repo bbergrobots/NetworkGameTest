@@ -18,10 +18,10 @@ public:
 
     /**
      * @brief constructor sets information about the system socket and the device that initiated the connection
-     * @param sockFieldDescriptor field descriptor of associated system socket
-     * @param addr address information about remote host
+     * @param socketFieldDescriptor field descriptor of associated system socket
+     * @param clientAddress address information about the remote host
      */
-    SessionSocket(int sockFieldDescriptor, struct sockaddr_in addr);
+    SessionSocket(int socketFieldDescriptor, struct sockaddr_in clientAddress);
 
     /**
      * @brief get a string containing the IPv4 address of the remote host

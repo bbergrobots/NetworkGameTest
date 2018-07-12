@@ -2,31 +2,34 @@
 // Created by Brendan Berg on 10.07.18.
 //
 
-#include "net/client/serverConnectionHandler.hpp"
+#include "net/client/clientConnectionController.hpp"
 
 #include "net/receiveQueue.hpp"
 
 #include <iostream>
 
 
-ServerConnectionHandler::ServerConnectionHandler(const char* serverAddress, unsigned short serverPort)
+ClientConnectionController::ClientConnectionController(const char* serverAddress, unsigned short serverPort)
     : m_Socket(serverAddress, serverPort)
 {
 
 }
 
-ServerConnectionHandler::~ServerConnectionHandler()
+ClientConnectionController::~ClientConnectionController()
 {
-    m_Running = false;
-    m_UpdateThread.join();
+    if (m_Running)
+    {
+        m_Running = false;
+        m_UpdateThread.join();
+    }
 }
 
-void ServerConnectionHandler::registerServerMessageReceiver(MessageReceiverInterface* serverMessageReceiver)
+void ClientConnectionController::registerServerMessageReceiver(MessageReceiverInterface* serverMessageReceiver)
 {
     m_ServerMessageReceiver.push_back(serverMessageReceiver);
 }
 
-void ServerConnectionHandler::establishConnection()
+void ClientConnectionController::establishConnection()
 {
     m_Socket.establishConnection();
     m_ServerConnected = true;
@@ -36,12 +39,12 @@ void ServerConnectionHandler::establishConnection()
     });
 }
 
-bool ServerConnectionHandler::isServerConnected() const
+bool ClientConnectionController::isServerConnected() const
 {
     return m_ServerConnected;
 }
 
-void ServerConnectionHandler::update()
+void ClientConnectionController::update()
 {
     MessageContainer msgContainer(1024);
     ReceiveQueue recvBuffer(4096);

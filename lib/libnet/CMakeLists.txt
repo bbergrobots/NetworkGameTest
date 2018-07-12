@@ -1,9 +1,9 @@
 add_library(
         net STATIC
-        src/serverConnectionHandler.cpp
+        src/clientConnectionController.cpp
         src/messageContainer.cpp
         src/receiveQueue.cpp
-        src/clientConnectionHandler.cpp
+        src/serverConnectionController.cpp
         src/sendQueue.cpp
 )
 

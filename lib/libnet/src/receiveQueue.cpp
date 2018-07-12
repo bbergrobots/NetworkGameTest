@@ -86,5 +86,12 @@ unsigned short ReceiveQueue::getFirstDataSize()
 
 unsigned char ReceiveQueue::getFirstHeader()
 {
-    return static_cast<unsigned char>(m_Buffer[2]);
+    if (m_Cursor < 3)
+    {
+        return 0;
+    }
+    else
+    {
+        return static_cast<unsigned char>(m_Buffer[2]);
+    }
 }

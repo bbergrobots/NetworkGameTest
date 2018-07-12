@@ -17,19 +17,19 @@ class BaseSocket
 public:
 
     /**
-     * @brief constructor initializes attributes without specializing socket operations
+     * @brief constructor initializes attributes without specifying socket usage
      */
     BaseSocket();
 
     /**
-     * @brief destructor closes the socket if open
+     * @brief destructor closes the socket if opened
      */
     ~BaseSocket();
 
     /**
      * @brief perform system calls to create the socket
      *
-     * This function should not get used for sockets created by the listening for incoming connections.
+     * This function should not get used for sockets created through the listening after incoming connections.
      */
     void init();
 
@@ -37,26 +37,26 @@ public:
      * @brief set blocking option for socket
      * @param state state of non-blocking flag
      *
-     * This function should not get used for sockets created by the listening for incoming connections.
+     * This function should not get used for sockets created through the listening after incoming connections.
      */
     void setNonBlocking(bool state) const;
 
     /**
-     * @brief bind socket to host
-     * @param port the port number the socket is assigned to, use 0 for any open port
+     * @brief bind socket to the host
+     * @param port the port number the socket is assigned to, use 0 to automaticly select a port
      *
-     * This function should not get used for sockets created by the listening for incoming connections.
+     * This function should not get used for sockets created through the listening after incoming connections.
      */
     void bindToHost(short port);
 
     /**
-     * @brief get the file descriptor of the socket for debugging purposes
-     * @return the file descriptor
+     * @brief get the file descriptor of the socket
+     * @return file descriptor
      */
     int getFileDescriptor() const;
 
     /**
-     * @brief close the socket if open
+     * @brief close the socket if opened
      */
     void closeSocket() const;
 

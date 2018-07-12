@@ -10,7 +10,7 @@
 
 
 /**
- * @brief class that represents a single socket that is capable of listening for incoming connections
+ * @brief class that represents a single socket with the ability to listen for incoming connections
  */
 class ListeningSocket : public BaseSocket
 {
@@ -19,13 +19,13 @@ public:
 
     /**
      * @brief constructor creates the socket, assigns it to a host port and starts listening for incoming connections
-     * @param port the port number the socket is assigned to, use 0 for any open port
+     * @param hostPort the port number the socket is assigned to, use 0 for any open port
      */
-    explicit ListeningSocket(short port);
+    explicit ListeningSocket(short hostPort);
 
     /**
-     * @brief check for new connection and create new session socket associated with incoming system socket
-     * @return pointer to new session socket
+     * @brief check for new connection and create new session socket associated to the incoming system socket if needed
+     * @return pointer to new session socket, user is required to free the pointer after usage
      * @retval nullptr no new incoming connection
      */
     SessionSocket* acceptConnection() const;

@@ -46,6 +46,7 @@ unsigned char* MessageContainer::getBufferStart()
     return m_Data;
 }
 
+// TODO: handle single digit numbers to occupy the same width as two digit numbers
 void MessageContainer::print()
 {
     std::cout << "Print message from server:\n";

@@ -18,7 +18,7 @@ SendQueue::~SendQueue()
     delete m_Buffer;
 }
 
-int SendQueue::setMessage(MessageContainer* messageContainer)
+bool SendQueue::setMessage(MessageContainer* messageContainer)
 {
     unsigned short messageSize = messageContainer->getDataSize();
     m_Mutex.lock();
@@ -32,12 +32,12 @@ int SendQueue::setMessage(MessageContainer* messageContainer)
         m_Cursor = m_Cursor + messageSize + 3;
 
         m_Mutex.unlock();
-        return 0;
+        return true;
     }
     else
     {
         m_Mutex.unlock();
-        return -1;
+        return false;
     }
 }
 

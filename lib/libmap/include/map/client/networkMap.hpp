@@ -10,16 +10,32 @@
 #include <net/messageReceiverInterface.hpp>
 
 
+/**
+ * @brief class that represents the game map which gets loaded through the network pipeline
+ */
 class NetworkMap : public BaseMap, public MessageReceiverInterface
 {
 
 public:
 
+    /**
+     * @brief constructor calls the superclass' constructor
+     * @param size number of 8x8 chunks per dimension
+     */
     explicit NetworkMap(unsigned int size);
 
-    bool canProcessData(MessageContainer* msg) const override;
+    /**
+     * @brief implemented function checks whether the class can process the provided network message
+     * @param messageContainer pointer to a received network message
+     * @return class can or cannot process the provided network message
+     */
+    bool canProcessData(MessageContainer* messageContainer) const override;
 
-    void processData(MessageContainer* msg) override;
+    /**
+     * @brief process the received network message
+     * @param messageContainer pointer to a received network message
+     */
+    void processData(MessageContainer* messageContainer) override;
 };
 
 

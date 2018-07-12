@@ -7,7 +7,7 @@
 
 #include "player/server/playerNetworkComponent.hpp"
 
-#include <net/server/clientConnectionHandler.hpp>
+#include <net/server/serverConnectionController.hpp>
 
 
 class PlayerListener
@@ -24,7 +24,7 @@ public:
 
 private:
 
-    ClientConnectionHandler m_ConnectionHandler;
+    ServerConnectionController m_ConnectionHandler;
 
 
 };

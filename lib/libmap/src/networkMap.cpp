@@ -8,21 +8,21 @@
 
 
 NetworkMap::NetworkMap(unsigned int size)
-        : BaseMap(size)
+    : BaseMap(size)
 {
-    print();
+
 }
 
-bool NetworkMap::canProcessData(MessageContainer* msg) const
+bool NetworkMap::canProcessData(MessageContainer* messageContainer) const
 {
-    return ((msg->getHeader() == 0x10) && (msg->getDataSize() == m_ByteNo));
+    return ((messageContainer->getHeader() == 0x10) && (messageContainer->getDataSize() == m_ByteNo));
 }
 
-void NetworkMap::processData(MessageContainer* msg)
+void NetworkMap::processData(MessageContainer* messageContainer)
 {
-    if (canProcessData(msg))
+    if (canProcessData(messageContainer))
     {
-        memcpy(m_MapData, msg->getBufferStart(), static_cast<size_t>(m_ByteNo));
+        memcpy(m_MapData, messageContainer->getBufferStart(), static_cast<size_t>(m_ByteNo));
         print();
     }
 }

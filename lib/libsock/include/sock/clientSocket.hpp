@@ -9,7 +9,7 @@
 
 
 /**
- * @brief class that represents a single socket that is capable of connecting to a remote host
+ * @brief class that represents a single socket with the ability to connect to a remote server
  */
 class ClientSocket : public TransmissionSocket
 {
@@ -18,13 +18,13 @@ public:
 
     /**
      * @brief constructor sets information about the targeted remote host and binds the socket to a free host port
-     * @param serverAddress string containing the IPv4 address of the targeted remote host
-     * @param serverPort targeted port on the remote host
+     * @param serverAddress string containing the IPv4 address of the targeted server
+     * @param serverPort targeted port on the server
      */
     ClientSocket(const char* serverAddress, unsigned short serverPort);
 
     /**
-     * @brief connect to targeted remote host and set non-blocking mode
+     * @brief connect to targeted server and set non-blocking mode
      */
     void establishConnection() const;
 
