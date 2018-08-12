@@ -43,7 +43,7 @@ public:
      * @brief check whether a complete message is available by checking the number of received bytes in the queue
      * @return is a message ready for further processing
      */
-    bool messageReadyForProcessing();
+    bool messageReadyForProcessing() const;
 
     /**
      * @brief dispatch the first message in the queue and copy it's data into the message container
@@ -73,21 +73,21 @@ private:
      * @brief get the number of free bytes at the end of the receive queue
      * @return free bytes at the end of the receive queue
      */
-    int getAvailableBytes();
+    int getAvailableBytes() const;
 
     /**
      * @brief get the data size of the first message inside the receive queue
      * @return size of the first message inside the receive queue without header information
      * @retval 0 header of first message is not complete
      */
-    unsigned short getFirstDataSize();
+    unsigned short getFirstDataSize() const;
 
     /**
      * @brief get the header of the first message inside the receive queue
      * @return header of the first message inside the receive queue
      * @retval 0 header of first message is not complete
      */
-    unsigned char getFirstHeader();
+    unsigned char getFirstHeader() const;
 
 
 };

@@ -24,9 +24,10 @@ ClientConnectionController::~ClientConnectionController()
     }
 }
 
-void ClientConnectionController::registerServerMessageReceiver(MessageReceiverInterface* serverMessageReceiver)
+void ClientConnectionController::registerMessageReceiver(
+        MessageReceiverInterface<MessageContainer>* messageReceiver)
 {
-    m_ServerMessageReceiver.push_back(serverMessageReceiver);
+    m_MessageReceiver.push_back(messageReceiver);
 }
 
 void ClientConnectionController::establishConnection()
@@ -62,9 +63,9 @@ void ClientConnectionController::update()
             while (recvBuffer.messageReadyForProcessing())
             {
                 recvBuffer.getMessage(&msgContainer);
-                msgContainer.print();
+                msgContainer.print("Received message from server");
 
-                for (auto smr : m_ServerMessageReceiver)
+                for (auto smr : m_MessageReceiver)
                 {
                     if (smr->canProcessData(&msgContainer))
                     {

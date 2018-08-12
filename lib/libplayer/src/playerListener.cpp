@@ -18,15 +18,15 @@ bool PlayerListener::newPlayerAvailable()
     return m_ConnectionHandler.newClientAvailable();
 }
 
-PlayerNetworkComponent* PlayerListener::getNewPlayerNetworkComp()
+PlayerNetworkComponent* PlayerListener::getNewPlayerNetworkComponent()
 {
-    PlayerNetworkComponent* newNetworkComp = nullptr;
+    PlayerNetworkComponent* newNetworkComponent = nullptr;
 
     if (newPlayerAvailable())
     {
         SessionSocket* newSessionSocket = m_ConnectionHandler.getNewClient();
-        newNetworkComp = new PlayerNetworkComponent(newSessionSocket);
+        newNetworkComponent = new PlayerNetworkComponent(newSessionSocket);
     }
 
-    return newNetworkComp;
+    return newNetworkComponent;
 }

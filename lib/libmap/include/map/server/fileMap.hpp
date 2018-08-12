@@ -7,13 +7,18 @@
 
 #include "map/baseMap.hpp"
 
+#include <net/messageReceiverInterface.hpp>
+#include <net/messageContainer.hpp>
+#include <player/server/playerMessageContainer.hpp>
+#include <player/server/player.hpp>
+
 #include <fstream>
 
 
 /**
  * @brief class that represents the game map with it's associates save file
  */
-class FileMap : public BaseMap
+class FileMap : public BaseMap, public MessageReceiverInterface<PlayerMessageContainer>
 {
 
 public:
@@ -50,6 +55,26 @@ public:
      * @return file size in bytes
      */
     int getFileSize();
+
+    /**
+     * @brief send entire map data to specified player
+     * @param player destination node
+     */
+    void sendEntireMapToPlayer(Player* player) const;
+
+    /**
+     * @brief implemented function checks whether the class can process the provided network message
+     * @param messageContainer pointer to a received network message
+     * @return class can or cannot process the provided network message
+     */
+    bool canProcessData(PlayerMessageContainer* messageContainer) const override;
+
+    /**
+     * @brief process the received network message
+     * @param messageContainer pointer to a received network message
+     */
+    void processData(PlayerMessageContainer* messageContainer) override;
+
 
 
 private:

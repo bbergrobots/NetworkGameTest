@@ -41,7 +41,7 @@ bool SendQueue::setMessage(MessageContainer* messageContainer)
     }
 }
 
-bool SendQueue::messageReadyForSending()
+bool SendQueue::messageReadyForSending() const
 {
     return m_Cursor != 0;
 }
@@ -56,7 +56,7 @@ int SendQueue::send(TransmissionSocket* socket)
     return ret;
 }
 
-int SendQueue::getAvailableBytes()
+int SendQueue::getAvailableBytes() const
 {
     return m_BufferSize - m_Cursor;
 }

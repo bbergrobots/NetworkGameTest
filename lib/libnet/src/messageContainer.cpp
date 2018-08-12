@@ -41,15 +41,15 @@ unsigned char MessageContainer::getHeader() const
     return m_Header;
 }
 
-unsigned char* MessageContainer::getBufferStart()
+unsigned char* MessageContainer::getBufferStart() const
 {
     return m_Data;
 }
 
-// TODO: handle single digit numbers to occupy the same width as two digit numbers
-void MessageContainer::print()
+// TODO: format single digit numbers to occupy the same width as two digit numbers
+void MessageContainer::print(std::string label) const
 {
-    std::cout << "Print message from server:\n";
+    std::cout << label << ":\n";
     std::cout << "      Size: " <<  m_DataSize  << '\n';
     std::cout << "    Header: 0x" << std::hex << static_cast<int>(m_Header) << '\n';
     std::cout << "      Data: ";

@@ -5,9 +5,10 @@
 #ifndef NETWORKGAMETEST_MESSAGECONTAINER_HPP
 #define NETWORKGAMETEST_MESSAGECONTAINER_HPP
 
+#include <string>
 
-// TODO: add function to copy buffer contents to provided buffer / from provided buffer
 
+// TODO: add functions to copy buffer contents to provided buffer / from provided buffer
 /**
  * @brief class that represents a socket message on the application layer containing decoded header information
  */
@@ -55,12 +56,12 @@ public:
      * @brief get the position of the data describing the message to copy it around
      * @return pointer to the first byte of the message
      */
-    unsigned char* getBufferStart();
+    unsigned char* getBufferStart() const;
 
     /**
      * @brief print the contained message in the console
      */
-    void print();
+    void print(std::string label) const;
 
 
 private:

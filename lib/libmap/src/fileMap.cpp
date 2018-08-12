@@ -90,3 +90,27 @@ int FileMap::getFileSize()
 
     return -1;
 }
+
+void FileMap::sendEntireMapToPlayer(Player* player) const
+{
+    MessageContainer msgContainer(m_ByteNo);
+    msgContainer.setHeader(0x10);
+    msgContainer.setDataSize(static_cast<unsigned short>(m_ByteNo));
+    memcpy(msgContainer.getBufferStart(), m_MapData, m_ByteNo);
+
+    player->getNetworkComponent()->sendMessage(&msgContainer);
+}
+
+bool FileMap::canProcessData(PlayerMessageContainer* messageContainer) const
+{
+    return ((messageContainer->getHeader() == 0x00) && (messageContainer->getDataSize() == 0));
+}
+
+void FileMap::processData(PlayerMessageContainer* messageContainer)
+{
+    if ((messageContainer->getHeader() == 0x00) && (messageContainer->getDataSize() == 0))
+    {
+        std::cout << "Send map to new connected player\n\n";
+        sendEntireMapToPlayer(messageContainer->getPlayer());
+    }
+}

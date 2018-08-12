@@ -14,7 +14,7 @@
 
 
 /**
- * @brief class that manages server sided all incoming socket connections
+ * @brief class that manages all incoming socket connections of the server
  */
 class ServerConnectionController
 {
@@ -23,7 +23,7 @@ public:
 
     /**
      * @brief constructor sets up the listening socket and starts the update thread
-     * @param hostPort
+     * @param hostPort the port number the controller is assigned to, use 0 for any open port
      */
     explicit ServerConnectionController(unsigned short hostPort);
 

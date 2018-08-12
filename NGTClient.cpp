@@ -17,7 +17,7 @@ int main()
     ClientConnectionController clientConnectionController("127.0.0.1", 1337);
 
     NetworkMap map(2);
-    clientConnectionController.registerServerMessageReceiver(&map);
+    clientConnectionController.registerMessageReceiver(&map);
 
     clientConnectionController.establishConnection();
 

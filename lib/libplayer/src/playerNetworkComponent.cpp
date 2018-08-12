@@ -5,9 +5,11 @@
 #include "player/server/playerNetworkComponent.hpp"
 
 #include <iostream>
+#include <string>
+
 
 PlayerNetworkComponent::PlayerNetworkComponent(SessionSocket* socket)
-    : m_Socket(socket), m_MessageContainer(1024), m_ReceiveQueue(4096)
+    : m_Socket(socket), m_MessageContainer(1024), m_ReceiveQueue(4096), m_SendQueue(4096)
 {
     m_ClientConnected = true;
 }
@@ -17,14 +19,22 @@ PlayerNetworkComponent::~PlayerNetworkComponent()
     delete m_Socket;
 }
 
-bool PlayerNetworkComponent::isClientConnected()
+bool PlayerNetworkComponent::isClientConnected() const
 {
     return m_ClientConnected;
 }
 
-int PlayerNetworkComponent::getFileDescriptor()
+int PlayerNetworkComponent::getFileDescriptor() const
 {
     return m_Socket->getFileDescriptor();
+}
+
+void PlayerNetworkComponent::sendMessage(MessageContainer* messageContainer)
+{
+    std::string label = "Send message to player ";
+    label += std::to_string(m_Socket->getFileDescriptor());
+    messageContainer->print(label);
+    m_SendQueue.setMessage(messageContainer);
 }
 
 void PlayerNetworkComponent::update()
@@ -40,8 +50,16 @@ void PlayerNetworkComponent::update()
         {
             while (m_ReceiveQueue.messageReadyForProcessing())
             {
+                std::string label = "Received message from player ";
+                label += std::to_string(m_Socket->getFileDescriptor());
                 m_ReceiveQueue.getMessage(&m_MessageContainer);
-                m_MessageContainer.print();
+                m_MessageContainer.print(label);
+                // TODO: distribute message to message receivers
+            }
+
+            while (m_SendQueue.messageReadyForSending())
+            {
+                m_SendQueue.send(m_Socket);
             }
         }
     }

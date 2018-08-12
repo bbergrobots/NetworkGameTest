@@ -8,23 +8,23 @@
 
 
 Player::Player(PlayerNetworkComponent* networkComponent)
-    : m_NetworkComp(networkComponent)
+    : m_NetworkComponent(networkComponent)
 {
-    std::cout << "Construct player with file descriptor " << m_NetworkComp->getFileDescriptor() << "\n\n";
+    std::cout << "Construct player with file descriptor " << m_NetworkComponent->getFileDescriptor() << "\n\n";
 }
 
 Player::~Player()
 {
-    std::cout << "Destruct player with file descriptor " << m_NetworkComp->getFileDescriptor() << "\n\n";
-    delete m_NetworkComp;
+    std::cout << "Destruct player with file descriptor " << m_NetworkComponent->getFileDescriptor() << "\n\n";
+    delete m_NetworkComponent;
 }
 
-bool Player::isClientConnected()
+PlayerNetworkComponent* Player::getNetworkComponent() const
 {
-    return m_NetworkComp->isClientConnected();
+    return m_NetworkComponent;
 }
 
 void Player::update()
 {
-    m_NetworkComp->update();
+    m_NetworkComponent->update();
 }

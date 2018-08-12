@@ -4,6 +4,7 @@ add_library(
         src/playerCollection.cpp
         src/playerListener.cpp
         src/playerNetworkComponent.cpp
+        src/playerMessageContainer.cpp
 )
 
 target_include_directories(

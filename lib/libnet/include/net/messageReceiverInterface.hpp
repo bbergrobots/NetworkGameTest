@@ -12,7 +12,9 @@
 
 /**
  * @brief interface that provides tha ability for a class to process a received network message
+ * @tparam T message container type
  */
+template <typename T>
 class MessageReceiverInterface
 {
 
@@ -27,7 +29,7 @@ public:
      * header and length of the message to avoid heavy buffer copying, which can be a bottleneck for
      * the entire network communication pipeline.
      */
-    virtual bool canProcessData(MessageContainer* messageContainer) const = 0;
+    virtual bool canProcessData(T* messageContainer) const = 0;
 
     /**
      * @brief process the received network message
@@ -38,7 +40,7 @@ public:
      * processing to avoid stopping the network communication pipeline. This can be done e.g. by
      * adding the message to a work queue and take care of it later or in an external thread.
      */
-    virtual void processData(MessageContainer* messageContainer) = 0;
+    virtual void processData(T* messageContainer) = 0;
 };
 
 

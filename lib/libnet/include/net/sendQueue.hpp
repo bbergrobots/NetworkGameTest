@@ -43,7 +43,7 @@ public:
      * @brief check whether the queue contains at least one message
      * @return is there a message in the queue
      */
-    bool messageReadyForSending();
+    bool messageReadyForSending() const;
 
     /**
      * @brief send all bytes in the queue via the provided socket
@@ -80,7 +80,7 @@ private:
      * @brief get the number of free bytes at the end of the receive queue
      * @return free bytes at the end of the receive queue
      */
-    int getAvailableBytes();
+    int getAvailableBytes() const;
 
 
 };

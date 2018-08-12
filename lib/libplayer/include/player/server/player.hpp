@@ -8,23 +8,43 @@
 #include "player/server/playerNetworkComponent.hpp"
 
 
+/**
+ * @brief class that represents all components of an active player
+ */
 class Player
 {
 
 public:
 
+    /**
+     * @brief constructor calls constructors of all components
+     * @param networkComponent network component of the player
+     */
     explicit Player(PlayerNetworkComponent* networkComponent);
 
+    /**
+     * @brief destructor calls destructors of all components
+     */
     ~Player();
 
-    bool isClientConnected();
+    /**
+     * @brief get the current network component of the player
+     * @return network component
+     */
+    PlayerNetworkComponent* getNetworkComponent() const;
 
+    /**
+     * @brief call update functions of all components
+     */
     void update();
 
 
 private:
 
-    PlayerNetworkComponent* m_NetworkComp;
+    /**
+     * @brief network component of the player
+     */
+    PlayerNetworkComponent* m_NetworkComponent;
 
 
 };

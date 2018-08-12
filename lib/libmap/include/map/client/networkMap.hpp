@@ -8,12 +8,13 @@
 #include "map/baseMap.hpp"
 
 #include <net/messageReceiverInterface.hpp>
+#include <net/messageContainer.hpp>
 
 
 /**
  * @brief class that represents the game map which gets loaded through the network pipeline
  */
-class NetworkMap : public BaseMap, public MessageReceiverInterface
+class NetworkMap : public BaseMap, public MessageReceiverInterface<MessageContainer>
 {
 
 public:

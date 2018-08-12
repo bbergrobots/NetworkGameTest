@@ -15,7 +15,8 @@ NetworkMap::NetworkMap(unsigned int size)
 
 bool NetworkMap::canProcessData(MessageContainer* messageContainer) const
 {
-    return ((messageContainer->getHeader() == 0x10) && (messageContainer->getDataSize() == m_ByteNo));
+    return ((messageContainer->getHeader() == 0x00) && (messageContainer->getDataSize() == 0)) ||
+           ((messageContainer->getHeader() == 0x10) && (messageContainer->getDataSize() == m_ByteNo));
 }
 
 void NetworkMap::processData(MessageContainer* messageContainer)

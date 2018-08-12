@@ -35,7 +35,7 @@ int ReceiveQueue::receive(TransmissionSocket* socket)
     return receivedBytes;
 }
 
-bool ReceiveQueue::messageReadyForProcessing()
+bool ReceiveQueue::messageReadyForProcessing() const
 {
     unsigned short messageSize = getFirstDataSize();
 
@@ -61,12 +61,12 @@ void ReceiveQueue::getMessage(MessageContainer* messageContainer)
     }
 }
 
-int ReceiveQueue::getAvailableBytes()
+int ReceiveQueue::getAvailableBytes() const
 {
     return m_BufferSize - m_Cursor;
 }
 
-unsigned short ReceiveQueue::getFirstDataSize()
+unsigned short ReceiveQueue::getFirstDataSize() const
 {
     unsigned short size;
 
@@ -84,7 +84,7 @@ unsigned short ReceiveQueue::getFirstDataSize()
     return size;
 }
 
-unsigned char ReceiveQueue::getFirstHeader()
+unsigned char ReceiveQueue::getFirstHeader() const
 {
     if (m_Cursor < 3)
     {

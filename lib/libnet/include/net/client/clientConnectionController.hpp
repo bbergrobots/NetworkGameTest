@@ -37,9 +37,9 @@ public:
     // TODO: accelerate with phone book principle
     /**
      * @brief register an object as a possible receiver for a message
-     * @param serverMessageReceiver object to register
+     * @param messageReceiver object to register
      */
-    void registerServerMessageReceiver(MessageReceiverInterface* serverMessageReceiver);
+    void registerMessageReceiver(MessageReceiverInterface<MessageContainer>* messageReceiver);
 
     /**
      * @brief establish the socket connection and start the update thread
@@ -81,7 +81,7 @@ private:
     /**
      * @brief list of all objects that can process some kind off received messages
      */
-    std::list<MessageReceiverInterface*> m_ServerMessageReceiver;
+    std::list<MessageReceiverInterface<MessageContainer>*> m_MessageReceiver;
 
     /**
      * @brief function that runs inside the update thread

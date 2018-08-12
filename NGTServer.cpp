@@ -18,6 +18,7 @@ int main()
 
     FileMap map(2, "map.bin");
     PlayerCollection playerCollection(new PlayerListener(1337));
+    playerCollection.registerMessageReceiver(&map);
 
     auto start = std::chrono::system_clock::now();
     auto end = start + std::chrono::seconds(60);
